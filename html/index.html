@@ -89,9 +89,9 @@
                 
                 <!-- Rechtliche Links (nur mobil sichtbar) -->
                 <div class="nav-section legal-nav">
-                    <a href="/impressum" class="nav-button">Impressum</a>
-                    <a href="/agb" class="nav-button">AGB's</a>
-                    <a href="/datenschutz" class="nav-button">Datenschutz</a>
+                    <a href="impressum.html" class="nav-button">Impressum</a>
+                    <a href="agb.html" class="nav-button">AGB's</a>
+                    <a href="datenschutz.html" class="nav-button">Datenschutz</a>
                     <button id="mobile-cookie-settings" class="nav-button">Cookie-Einstellungen</button>
                 </div>
             </div>
@@ -240,10 +240,10 @@
                 </a>
             </div>
             <div class="footer-links">
-                <a href="/impressum">Impressum</a>
-                <a href="/agb">AGB</a>
-                <a href="/datenschutz">Datenschutz</a>
-                <a href="/sitemap">Sitemap</a>
+                <a href="impressum.html">Impressum</a>
+                <a href="agb.html">AGB</a>
+                <a href="datenschutz.html">Datenschutz</a>
+                <a href="sitemap.html">Sitemap</a>
                 <button id="cookie-settings-footer" class="footer-cookie-button">Cookie-Einstellungen</button>
             </div>
             <div class="footer-social">
@@ -310,7 +310,7 @@
     <div id="cookie-consent" class="cookie-banner">
         <div class="cookie-content">
             <h3>Cookie-Einstellungen</h3>
-            <p>Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+            <p>Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
             <div class="cookie-buttons">
                 <button id="accept-all-cookies" class="cookie-button accept">Alle akzeptieren</button>
                 <button id="accept-essential-cookies" class="cookie-button essential">Nur essenzielle Cookies</button>
@@ -417,7 +417,7 @@
                 
                 try {
                     // API-Anfrage senden
-                    const response = await fetch('/api/kontakt', {
+                    const response = await fetch('../api/kontakt', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -435,7 +435,7 @@
                         
                         // Optional: Weiterleitung zur Danke-Seite
                         setTimeout(() => {
-                            window.location.href = '/danke';
+                            window.location.href = 'danke.html';
                         }, 3000);
                     } else {
                         // Fehler anzeigen

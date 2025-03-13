@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="0; url=html/index.html">
     <title>KANID UG - Weiterleitung</title>
+    <script>
+        // Diese Funktion leitet Links zu Impressum, AGB und Datenschutz korrekt weiter
+        window.onload = function() {
+            // Prüfen, ob ein Pfad in der URL ist
+            const path = window.location.pathname;
+            
+            // Weiterleitungslogik basierend auf dem Pfad
+            if (path === '/impressum' || path === '/impressum.html') {
+                window.location.href = 'html/impressum.html';
+            } else if (path === '/agb' || path === '/agb.html') {
+                window.location.href = 'html/agb.html';
+            } else if (path === '/datenschutz' || path === '/datenschutz.html') {
+                window.location.href = 'html/datenschutz.html';
+            } else if (path === '/danke' || path === '/danke.html') {
+                window.location.href = 'html/danke.html';
+            } else if (path === '/sitemap' || path === '/sitemap.html') {
+                window.location.href = 'html/sitemap.html';
+            } else if (path === '/' || path === '/index.html') {
+                window.location.href = 'html/index.html';
+            }
+        };
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
