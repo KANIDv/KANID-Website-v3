@@ -151,7 +151,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.scrollSnapType = 'y mandatory';
         document.querySelectorAll('section[id]').forEach(section => {
             section.style.scrollSnapAlign = 'start';
+            // Stelle sicher, dass der Kontaktbereich richtig angesteuert wird
+            if (section.id === 'kontakt') {
+                section.style.scrollSnapAlign = 'start';
+                section.style.scrollSnapStop = 'always';
+            }
         });
+
+        // Stelle zusätzlich sicher, dass der Kontaktbereich das Snap-Verhalten hat
+        const contactSection = document.getElementById('kontakt');
+        if (contactSection) {
+            contactSection.style.scrollSnapAlign = 'start';
+            contactSection.style.scrollSnapStop = 'always';
+            // Wichtig: Setze eine angemessene Mindesthöhe für den Kontaktbereich
+            contactSection.style.minHeight = '100vh';
+        }
 
         let isScrolling = false;
         const mainSections = document.querySelectorAll('section[id]');
