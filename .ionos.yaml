@@ -1,0 +1,15 @@
+---
+# IONOS Deploy Now Konfiguration
+distFolder: .
+deploy:
+  # Deploy-Hook für das Bauen des Projekts
+  buildCmd: npm ci
+  # Verzeichnis, in dem die statischen Dateien liegen
+  fromDist: true
+
+# API-Routen von IONOS Deploy Now
+apiRoutes:
+  - path: /api
+    directory: api
+    handler: kontakt.js
+    runtime: node 

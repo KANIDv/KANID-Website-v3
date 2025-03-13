@@ -1,0 +1,17 @@
+{
+  "name": "kanid-website",
+  "version": "1.0.0",
+  "description": "Website und Kontaktformular der KANID UG",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Build erfolgreich' > build.log"
+  },
+  "dependencies": {
+    "resend": "^2.0.0"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+} 
