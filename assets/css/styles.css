@@ -35,8 +35,9 @@ section[id] {
 
 /* Spezifische Regel für den Kontaktbereich */
 #kontakt {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    min-height: 100vh;
 }
 
 body {

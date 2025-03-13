@@ -11,7 +11,7 @@
     <meta name="geo.placename" content="Gerlingen">
     <title>KANID UG - Technische Beratung & Konstruktion | Gerlingen, Stuttgart</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="canonical" href="https://kanid.de/">
     
     <!-- Technische Optimierungen -->
@@ -24,16 +24,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     
-    <!-- EmailJS Integration -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <!-- Strukturierte Daten (Schema.org) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "KANID UG",
-      "image": "/assets/img/LOGO.png",
+      "image": "/img/LOGO.png",
       "url": "https://kanid.de",
       "telephone": "+4915207921611",
       "email": "info@kanid.de",
@@ -75,8 +72,8 @@
     <header class="header">
         <div class="header-bg"></div>
         <nav class="navbar">
-            <a href="/home" class="logo-link">
-                <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="logo">
+            <a href="/" class="logo-link">
+                <img src="/img/LOGO.png" alt="KANID UG Logo" class="logo">
             </a>
             <button class="menu-toggle" aria-label="Menü öffnen">
                 <span class="hamburger"></span>
@@ -122,7 +119,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="/assets/img/icons/konstruktion-icon.svg" alt="CAD-Konstruktion und SolidWorks Design für Maschinenbau von KANID">
+                        <img src="/img/icons/konstruktion-icon.svg" alt="CAD-Konstruktion und SolidWorks Design für Maschinenbau von KANID">
                     </div>
                     <h3>CAD-Konstruktionsberatung</h3>
                     <p>Professionelle CAD-Konstruktion & Design mit SolidWorks und OnShape, Erstellung präziser Fertigungszeichnungen, vollständiger Stücklisten und funktionaler Prototypen. Inklusive Festigkeitsberechnungen und Optimierung von Metallkonstruktionen für maximale Effizienz.</p>
@@ -131,7 +128,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="/assets/img/icons/process-icon.svg" alt="Lean Manufacturing und Prozessoptimierung für Industriebetriebe">
+                        <img src="/img/icons/process-icon.svg" alt="Lean Manufacturing und Prozessoptimierung für Industriebetriebe">
                     </div>
                     <h3>Prozess- und Produktionsoptimierung</h3>
                     <p>Effizientes Lean Manufacturing speziell für metallverarbeitende Betriebe, strukturierte Prozessoptimierung und nahtlose Einführung neuer Softwarelösungen. Inklusive umfassender Mitarbeiterschulung und Implementation von Qualitätsmanagementsystemen.</p>
@@ -140,7 +137,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="/assets/img/icons/service-icon.svg" alt="Professionelle Aftersales- und Servicekonzepte für Maschinenbau">
+                        <img src="/img/icons/service-icon.svg" alt="Professionelle Aftersales- und Servicekonzepte für Maschinenbau">
                     </div>
                     <h3>Aftersales- und Servicekonzepte</h3>
                     <p>Maßgeschneidertes Reklamations- und Beschwerdemanagement, strategische Optimierung der Kundenservice-Strukturen und zielgerichtete Mitarbeiterschulungen für den PV- und Maschinenbausektor mit messbarer Kundenzufriedenheitssteigerung.</p>
@@ -149,7 +146,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="/assets/img/icons/3d-print-icon.svg" alt="Professioneller 3D-Druck Service und Prototypenbau">
+                        <img src="/img/icons/3d-print-icon.svg" alt="Professioneller 3D-Druck Service und Prototypenbau">
                     </div>
                     <h3>3D-Druck & Additive Fertigung</h3>
                     <p>Hochpräziser Prototypenbau, wirtschaftliche Fertigung von Kleinserien und kundenspezifischen Sonderlösungen. Umfassende Beratung zur Integration von 3D-Drucktechnologien in Ihre bestehenden Produktionsprozesse.</p>
@@ -164,7 +161,7 @@
                 <!-- Team-Karte -->
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="/assets/img/konstantin.jpg" alt="Konstantin Vinogradov" class="profile-image">
+                        <img src="/img/konstantin.jpg" alt="Konstantin Vinogradov" class="profile-image">
                     </div>
                     <h3>Konstantin Vinogradov</h3>
                     <p>Geschäftsführer</p>
@@ -238,15 +235,15 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <a href="/home">
-                    <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="footer-logo-img">
+                <a href="/">
+                    <img src="/img/LOGO.png" alt="KANID UG Logo" class="footer-logo-img">
                 </a>
             </div>
             <div class="footer-links">
                 <a href="/impressum">Impressum</a>
                 <a href="/agb">AGB</a>
                 <a href="/datenschutz">Datenschutz</a>
-                <a href="/sitemap">Sitemap</a>
+                <a href="sitemap.html">Sitemap</a>
                 <button id="cookie-settings-footer" class="footer-cookie-button">Cookie-Einstellungen</button>
             </div>
             <div class="footer-social">
@@ -355,6 +352,9 @@
     </div>
 
     <script src="/assets/js/scripts.js"></script>
+    
+    <!-- EmailJS-Bibliothek -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- EmailJS Kontaktformular -->
     <script src="/assets/js/contact-form.js"></script>

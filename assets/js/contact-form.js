@@ -1,8 +1,8 @@
 // EmailJS Kontaktformular-Funktionalität
 document.addEventListener('DOMContentLoaded', function() {
     // EmailJS initialisieren
-    emailjs.init("YOUR_USER_ID"); // Hier deine EmailJS User ID eintragen
-
+    emailjs.init("CXo-0j7h5Uf3BqfaH"); // Korrekter User ID für EmailJS
+    
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // EmailJS Service und Template IDs hier eintragen
             emailjs.send(
-                'service_qrnw51e',  // Deine Service ID
-                'template_7fy7aov', // Deine Template ID
+                'service_qrnw51e',  // Service ID
+                'template_7fy7aov', // Template ID
                 templateParams
             )
             .then(function(response) {
