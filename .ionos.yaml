@@ -14,3 +14,5 @@ apiRoutes:
     directory: api
     handler: kontakt.js
     runtime: node:18
+    environment:
+      RESEND_API_KEY: ${RESEND_API_KEY}
