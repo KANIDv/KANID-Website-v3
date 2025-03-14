@@ -1,22 +1,10 @@
 // API-Handler für das KANID Kontaktformular
 // Verarbeitet eingehende Anfragen und sendet E-Mails via Resend API
 
-// Umgebungsvariablen laden
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-require('./env-loader');
-
 import { Resend } from 'resend';
 
-// Verschiedene Möglichkeiten für die Schlüsselquelle prüfen (IONOS Deploy Now, GitHub Actions)
-const RESEND_API_KEY = process.env.RESEND_API_KEY || 
-                       process.env.GITHUB_ENV_RESEND_API_KEY || 
-                       process.env.SECRETS_RESEND_API_KEY;
-
-// Debug-Logging
-console.log('Umgebungsvariablen verfügbar:', Object.keys(process.env).filter(key => 
-  !key.includes('SECRET') && !key.includes('KEY') && !key.includes('TOKEN')));
-console.log('API-Schlüssel vorhanden:', !!RESEND_API_KEY);
+// API-Schlüssel direkt im Code (ersetzen Sie diesen durch Ihren tatsächlichen Resend API-Key)
+const RESEND_API_KEY = "re_123456YourActualKeyHere";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key von Resend
 
 // Konfiguration
 const CONFIG = {
@@ -53,13 +41,6 @@ export default async function handler(req, res) {
 
   try {
     console.log('Kontaktformular-Anfrage empfangen');
-    
-    // Fehlende API-Schlüssel prüfen
-    if (!RESEND_API_KEY) {
-      console.error('Fehlender Resend API-Schlüssel in der Umgebungskonfiguration');
-      console.error('Verfügbare Umgebungsvariablen:', Object.keys(process.env).filter(key => !key.includes('KEY') && !key.includes('SECRET')));
-      return res.status(500).json({ message: 'Konfigurationsfehler auf dem Server. Bitte kontaktieren Sie uns direkt per E-Mail.' });
-    }
 
     // Formulardaten extrahieren und validieren
     let { name, email, subject, message } = {};
@@ -167,4 +148,4 @@ export default async function handler(req, res) {
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
-} 
+}
