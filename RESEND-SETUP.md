@@ -23,19 +23,16 @@ Dieser Leitfaden führt Sie durch die Einrichtung von [Resend](https://resend.co
 3. Geben Sie einen Namen für den Schlüssel ein (z.B. "KANID Kontaktformular")
 4. Kopieren Sie den generierten API-Schlüssel und bewahren Sie ihn sicher auf
 
-## 4. API-Schlüssel in Ihrer Umgebung einrichten
+## 4. API-Schlüssel im Code einrichten
 
-1. Erstellen Sie eine `.env`-Datei im Hauptverzeichnis Ihres Projekts
-2. Fügen Sie die folgende Zeile hinzu:
-   ```
-   RESEND_API_KEY=re_123456789
+1. Öffnen Sie die Datei `api/kontakt.js`
+2. Ersetzen Sie den Platzhalter-API-Schlüssel mit Ihrem tatsächlichen Schlüssel:
+   ```javascript
+   const RESEND_API_KEY = "re_123456789"; // Ersetzen Sie dies mit Ihrem echten API-Key
    ```
    (Ersetzen Sie re_123456789 mit Ihrem tatsächlichen API-Schlüssel)
 
-3. Wenn Sie eine Produktionsumgebung nutzen, fügen Sie die Umgebungsvariable dort hinzu:
-   - Gehen Sie zu den Einstellungen Ihres Hosting-Dienstes
-   - Fügen Sie die Umgebungsvariable RESEND_API_KEY mit Ihrem API-Schlüssel hinzu
-   - Starten Sie Ihr Deployment neu
+3. Speichern Sie die Datei und deployen Sie die Änderungen.
 
 ## 5. Testen der E-Mail-Funktion
 
@@ -61,8 +58,12 @@ Wenn keine E-Mails empfangen werden:
    - Gehen Sie zu [resend.com/logs](https://resend.com/logs)
    - Überprüfen Sie, ob E-Mails versendet wurden und was deren Status ist
 
-## 7. Weitere Ressourcen
+## 7. Sicherheitshinweis
+
+Bitte beachten Sie, dass das Speichern des API-Schlüssels direkt im Code eine einfache Lösung ist, aber in einer Produktionsumgebung mit sensiblen Daten nicht ideal ist. Für eine sicherere Lösung könnten Sie in Zukunft auf Umgebungsvariablen zurückgreifen, die in Ihrem Hosting-Service konfiguriert werden.
+
+## 8. Weitere Ressourcen
 
 - [Resend Dokumentation](https://resend.com/docs)
 - [Resend API-Referenz](https://resend.com/docs/api-reference)
-- [Resend SMTP-Einrichtung](https://resend.com/docs/send-with-smtp) 
+- [Resend SMTP-Einrichtung](https://resend.com/docs/send-with-smtp)
