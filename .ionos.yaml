@@ -6,6 +6,7 @@ deploy:
   buildCmd: npm ci
   # Verzeichnis, in dem die statischen Dateien liegen
   fromDist: true
+  output: .
 
 # API-Routen von IONOS Deploy Now
 apiRoutes:
