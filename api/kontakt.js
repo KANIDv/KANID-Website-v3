@@ -3,27 +3,16 @@
 
 const { Resend } = require('resend');
 
-// API-Schlüssel direkt im Code (ersetzen Sie diesen durch Ihren tatsächlichen Resend API-Key)
-const RESEND_API_KEY = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key von Resend
-
-// Konfiguration
-const CONFIG = {
-  // Admin-E-Mail, die die Kontaktanfragen erhält
-  ADMIN_EMAIL: 'info@kanid.de',
-  // Absender-E-Mail (muss von Resend verifiziert sein)
-  FROM_EMAIL: 'kontakt@kanid.de',
-  // Name des Absenders
-  FROM_NAME: 'KANID UG Kontaktformular'
-};
-
-// Validiert eine E-Mail-Adresse
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+// API-Schlüssel
+const RESEND_API_KEY = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";
 
 // Handler-Funktion für HTTP-Anfragen
 module.exports = async function(req, res) {
+  // Debug-Information speichern
+  console.log('===== KONTAKTFORMULAR API START =====');
+  console.log('Request-Methode:', req.method);
+  console.log('Request-Headers:', JSON.stringify(req.headers));
+  
   // CORS-Header
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -34,13 +23,23 @@ module.exports = async function(req, res) {
     return res.status(200).end();
   }
 
+  // Test-Endpoint für einfache Überprüfung
+  if (req.url === '/api/kontakt/test') {
+    return res.status(200).json({ message: 'API funktioniert!' });
+  }
+
   // Nur POST-Anfragen erlauben
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    console.log('Anfrage empfangen');
+    console.log('POST-Anfrage empfangen');
+    console.log('Body-Typ:', typeof req.body);
+    
+    if (req.body) {
+      console.log('Body-Inhalt:', typeof req.body === 'string' ? req.body : JSON.stringify(req.body));
+    }
     
     // Formulardaten extrahieren
     let name, email, subject, message;
@@ -48,61 +47,81 @@ module.exports = async function(req, res) {
     try {
       // Body-Parsing-Logik
       if (typeof req.body === 'string') {
+        console.log('Versuche JSON zu parsen...');
         const parsedBody = JSON.parse(req.body);
         name = parsedBody.name;
         email = parsedBody.email;
-        subject = parsedBody.subject;
+        subject = parsedBody.subject || 'Kontaktanfrage';
         message = parsedBody.message;
       } else {
-        ({ name, email, subject, message } = req.body);
+        console.log('Body ist bereits geparst');
+        name = req.body.name;
+        email = req.body.email;
+        subject = req.body.subject || 'Kontaktanfrage';
+        message = req.body.message;
       }
+      
+      console.log('Extrahierte Daten:', { name, email, subject });
     } catch (parseError) {
       console.error('Parsing-Fehler:', parseError);
-      return res.status(400).json({ error: 'Ungültiges Format' });
+      return res.status(400).json({ error: 'Ungültiges Format', details: parseError.message });
     }
     
     // Validierung
-    if (!name || !email || !subject || !message) {
-      return res.status(400).json({ error: 'Alle Felder erforderlich' });
+    if (!name || !email || !message) {
+      console.log('Validierungsfehler: Fehlende Felder');
+      return res.status(400).json({ error: 'Fehlende Pflichtfelder', missing: { name: !name, email: !email, message: !message } });
     }
     
-    console.log('Sende E-Mail...');
-    
-    // Resend initialisieren
-    const resend = new Resend(RESEND_API_KEY);
+    // Versuch E-Mail zu senden
+    try {
+      console.log('Initialisiere Resend mit Key-Anfang:', RESEND_API_KEY.substring(0, 10) + '...');
+      const resend = new Resend(RESEND_API_KEY);
 
-    // E-Mail senden
-    const data = await resend.emails.send({
-      from: 'KANID UG Kontaktformular <kontakt@kanid.de>',
-      to: 'info@kanid.de',
-      subject: `Neue Anfrage: ${subject}`,
-      html: `
-        <h2>Neue Kontaktanfrage</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>E-Mail:</strong> ${email}</p>
-        <p><strong>Betreff:</strong> ${subject}</p>
-        <p><strong>Nachricht:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-      `
-    });
-    
-    console.log('E-Mail gesendet, ID:', data.id);
-    
-    // Erfolgsantwort
-    return res.status(200).json({ 
-      success: true, 
-      message: 'Nachricht gesendet' 
-    });
+      console.log('Sende E-Mail...');
+      
+      // Email mit vereinfachter Konfiguration
+      const emailData = {
+        from: 'kontakt@kanid.de',
+        to: 'info@kanid.de',
+        subject: `Kontaktanfrage: ${subject}`,
+        html: `<p><b>Name:</b> ${name}</p><p><b>E-Mail:</b> ${email}</p><p><b>Nachricht:</b> ${message}</p>`
+      };
+      
+      console.log('E-Mail-Konfiguration:', JSON.stringify(emailData));
+      
+      const data = await resend.emails.send(emailData);
+      
+      console.log('E-Mail gesendet, Antwort:', JSON.stringify(data));
+      
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Nachricht gesendet',
+        id: data.id
+      });
+    } catch (emailError) {
+      console.error('Fehler beim E-Mail-Versand:', emailError);
+      console.error('Fehlerdetails:', emailError.stack);
+      
+      return res.status(500).json({ 
+        error: 'E-Mail konnte nicht gesendet werden',
+        details: emailError.message,
+        name: emailError.name,
+        code: emailError.code || 'unknown'
+      });
+    }
     
   } catch (error) {
-    // Ausführliche Fehlerprotokollierung
-    console.error('Fehler:', error);
+    // Allgemeine Fehlerbehandlung
+    console.error('Allgemeiner Fehler:', error);
     console.error('Fehlerdetails:', error.stack);
     
-    // Benutzerfreundliche Antwort
     return res.status(500).json({ 
-      error: 'Serverfehler', 
-      message: 'Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.'
+      error: 'Serverfehler',
+      message: 'Ein unerwarteter Fehler ist aufgetreten',
+      details: error.message
     });
+  } finally {
+    console.log('===== KONTAKTFORMULAR API ENDE =====');
   }
 }; 

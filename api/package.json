@@ -9,5 +9,8 @@
   },
   "engines": {
     "node": ">=18.x"
+  },
+  "scripts": {
+    "test": "node -e \"console.log('Resend Test'); const { Resend } = require('resend'); const resend = new Resend('re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ'); console.log('Resend-Objekt erstellt:', !!resend);\""
   }
 } 

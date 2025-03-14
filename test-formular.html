@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KANID Kontaktformular Testseite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .test-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>KANID Kontaktformular Test</h1>
+    
+    <div class="test-buttons">
+        <button id="testApi">API-Test aufrufen</button>
+        <button id="clearResults">Ergebnisse löschen</button>
+    </div>
+    
+    <form id="contactForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="subject">Betreff:</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Nachricht:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        
+        <button type="submit">Nachricht senden</button>
+    </form>
+    
+    <div id="resultContainer"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const resultContainer = document.getElementById('resultContainer');
+            const testApiButton = document.getElementById('testApi');
+            const clearResultsButton = document.getElementById('clearResults');
+            
+            function addResult(type, title, content) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `message ${type}`;
+                
+                const titleElem = document.createElement('h3');
+                titleElem.textContent = title;
+                resultDiv.appendChild(titleElem);
+                
+                const contentPre = document.createElement('pre');
+                contentPre.textContent = typeof content === 'object' ? JSON.stringify(content, null, 2) : content;
+                resultDiv.appendChild(contentPre);
+                
+                resultContainer.prepend(resultDiv);
+            }
+            
+            // Test API Button
+            testApiButton.addEventListener('click', async function() {
+                try {
+                    const response = await fetch('/api/test');
+                    const data = await response.json();
+                    addResult('success', 'API-Test erfolgreich', data);
+                } catch (error) {
+                    addResult('error', 'API-Test fehlgeschlagen', error.message);
+                }
+            });
+            
+            // Clear Results Button
+            clearResultsButton.addEventListener('click', function() {
+                resultContainer.innerHTML = '';
+            });
+            
+            // Handle form submission
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                try {
+                    const response = await fetch('/api/kontakt', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const contentType = response.headers.get('content-type');
+                    let responseData;
+                    
+                    if (contentType && contentType.includes('application/json')) {
+                        responseData = await response.json();
+                    } else {
+                        responseData = await response.text();
+                    }
+                    
+                    if (response.ok) {
+                        addResult('success', 'Nachricht gesendet', {
+                            status: response.status,
+                            data: responseData
+                        });
+                        contactForm.reset();
+                    } else {
+                        addResult('error', `Fehler (${response.status})`, {
+                            status: response.status,
+                            data: responseData
+                        });
+                    }
+                } catch (error) {
+                    addResult('error', 'Anfragefehler', error.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
