@@ -52,23 +52,33 @@ Die API sendet zwei E-Mails:
 1. Eine Benachrichtigung an den KANID UG Administrator mit Details der Anfrage
 2. Eine Bestätigungs-E-Mail an den Besucher, der das Formular ausgefüllt hat
 
-## Umgebungsvariablen
+## API-Schlüssel Konfiguration
 
-Die API benötigt folgende Umgebungsvariable, die in der IONOS Deploy Now Plattform konfiguriert werden muss:
+Die API verwendet einen Resend API-Schlüssel, der direkt im Code konfiguriert ist:
 
-- `RESEND_API_KEY`: Der API-Schlüssel für den Resend-Dienst
+```javascript
+// In der Datei api/kontakt.js
+const RESEND_API_KEY = "re_123456YourActualKeyHere";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key
+```
+
+Um den API-Schlüssel zu ändern, bearbeiten Sie die Datei `api/kontakt.js` und aktualisieren Sie den Wert entsprechend.
 
 ## Einrichtung in IONOS Deploy Now
 
-1. Navigieren Sie zu den Einstellungen Ihres IONOS Deploy Now Projekts
-2. Gehen Sie zum Bereich "Umgebungsvariablen"
-3. Fügen Sie `RESEND_API_KEY` mit Ihrem tatsächlichen Resend API-Schlüssel hinzu
-4. Speichern Sie die Einstellungen und starten Sie eine Neubereitstellung
+1. Stellen Sie sicher, dass die Node.js-Version in der `.ionos.yaml` auf mindestens 18 eingestellt ist:
+   ```yaml
+   apiRoutes:
+     - path: /api/kontakt
+       directory: api
+       handler: kontakt.js
+       runtime: node:18
+   ```
+
+2. Folgen Sie der Anleitung in der RESEND-SETUP.md-Datei, um den API-Schlüssel zu erstellen und im Code zu konfigurieren.
 
 ## Lokale Entwicklung
 
 Um die API lokal zu testen:
 
-1. Erstellen Sie eine `.env` Datei basierend auf `.env.example`
-2. Fügen Sie Ihren Resend API-Schlüssel in die `.env` Datei ein
-3. Verwenden Sie ein Tool wie [ntl dev](https://www.netlify.com/products/dev/) oder einen ähnlichen Serverless-Entwicklungsserver 
+1. Stellen Sie sicher, dass der API-Schlüssel in der Datei `api/kontakt.js` korrekt eingetragen ist
+2. Führen Sie einen lokalen Entwicklungsserver aus, der Serverless-Funktionen unterstützt
