@@ -2,6 +2,8 @@
 // Verarbeitet eingehende Anfragen und sendet E-Mails via Resend API
 
 // Umgebungsvariablen laden
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 require('./env-loader');
 
 import { Resend } from 'resend';
@@ -11,12 +13,10 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY ||
                        process.env.GITHUB_ENV_RESEND_API_KEY || 
                        process.env.SECRETS_RESEND_API_KEY;
 
-// Debug-Logging (wird nur in der Entwicklungsumgebung angezeigt)
-const isDebug = process.env.NODE_ENV === 'development';
-if (isDebug) {
-  console.log('Umgebungsvariablen verfügbar:', Object.keys(process.env));
-  console.log('API-Schlüssel vorhanden:', !!RESEND_API_KEY);
-}
+// Debug-Logging
+console.log('Umgebungsvariablen verfügbar:', Object.keys(process.env).filter(key => 
+  !key.includes('SECRET') && !key.includes('KEY') && !key.includes('TOKEN')));
+console.log('API-Schlüssel vorhanden:', !!RESEND_API_KEY);
 
 // Konfiguration
 const CONFIG = {
@@ -164,7 +164,7 @@ export default async function handler(req, res) {
     
     return res.status(500).json({ 
       message: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.',
-      error: isDebug ? error.message : undefined
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 } 
