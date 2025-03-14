@@ -1,6 +1,9 @@
 // API-Handler für das KANID Kontaktformular
 // Verarbeitet eingehende Anfragen und sendet E-Mails via Resend API
 
+// Umgebungsvariablen laden
+require('./env-loader');
+
 import { Resend } from 'resend';
 
 // Verschiedene Möglichkeiten für die Schlüsselquelle prüfen (IONOS Deploy Now, GitHub Actions)
