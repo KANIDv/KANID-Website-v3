@@ -13,4 +13,4 @@ apiRoutes:
   - path: /api
     directory: api
     handler: kontakt.js
-    runtime: node 
+    runtime: node:18
