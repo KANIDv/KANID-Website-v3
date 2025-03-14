@@ -1,79 +1,111 @@
 # KANID UG Website
 
-Offizielle Website der KANID UG - Technische Beratung & Konstruktion aus Gerlingen bei Stuttgart.
+Website und Kontaktformular der KANID UG. Diese Website verwendet IONOS Deploy Now für das Hosting und Resend für die E-Mail-Funktionalität des Kontaktformulars.
 
-## Technologie-Stack
+## Funktionen
 
-- Reines HTML, CSS und JavaScript
-- Kontaktformular mit Serverless API (Resend)
-- IONOS Deploy Now für Hosting und API-Bereitstellung
+- Responsive Design für alle Geräte
+- Moderne, benutzerfreundliche Benutzeroberfläche
+- Kontaktformular mit E-Mail-Integration über Resend
+- Serverless API mit IONOS Deploy Now
 
-## Projektstruktur
+## Technischer Überblick
 
-- `assets/` - Statische Dateien wie CSS, JS und Bilder
+Die Website ist statisch mit HTML, CSS und JavaScript aufgebaut. Das Kontaktformular nutzt eine Serverless-Funktion, die mit IONOS Deploy Now bereitgestellt wird und E-Mails über den Resend-Dienst versendet.
+
+### Verzeichnisstruktur
+
+- `html/` - Statische HTML-Dateien der Website
+- `assets/` - CSS, JavaScript und Bilder 
   - `css/` - Stylesheets
   - `js/` - JavaScript-Dateien
-  - `img/` - Bilder und Icons
-- `html/` - HTML-Dateien für die verschiedenen Seiten
+  - `img/` - Bilder und Grafiken
 - `api/` - Serverless-Funktionen für das Kontaktformular
-- `.htaccess` - Apache-Konfiguration für URL-Rewrites und Caching
-- `.ionos.yaml` - Konfigurationsdatei für IONOS Deploy Now
+- `public/` - Statische Assets für die API-Dokumentation
+
+## Einrichtung des Kontaktformulars mit Resend und IONOS Deploy Now
+
+Um das Kontaktformular mit Resend und IONOS Deploy Now einzurichten, folgen Sie diesen Schritten:
+
+### 1. Resend-Konto einrichten
+
+Folgen Sie den Anweisungen in der Datei [RESEND-SETUP.md](RESEND-SETUP.md), um:
+- Ein Resend-Konto zu erstellen
+- Ihre Domain zu verifizieren
+- Einen API-Schlüssel zu generieren
+
+### 2. API-Schlüssel konfigurieren
+
+Der API-Schlüssel wird direkt im Code der API-Funktion konfiguriert:
+
+1. Öffnen Sie die Datei `api/kontakt.js`
+2. Suchen Sie die Zeile mit der API-Schlüssel-Definition:
+   ```javascript
+   const RESEND_API_KEY = "re_123456YourActualKeyHere";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key
+   ```
+3. Ersetzen Sie den Platzhalter mit Ihrem tatsächlichen Resend API-Schlüssel
+
+### 3. Deployment konfigurieren
+
+Die Konfiguration für IONOS Deploy Now ist bereits in der `.ionos.yaml`-Datei enthalten:
+
+```yaml
+distFolder: .
+deploy:
+  buildCmd: npm ci
+  fromDist: true
+  output: .
+
+apiRoutes:
+  - path: /api/kontakt
+    directory: api
+    handler: kontakt.js
+    runtime: node:18
+```
+
+### 4. Deployment starten
+
+1. Pushen Sie Ihre Änderungen in das verbundene Git-Repository
+2. IONOS Deploy Now erkennt die Änderungen und startet automatisch ein neues Deployment
+3. Die API-Route `/api/kontakt` wird automatisch konfiguriert
+
+### 5. Testen des Kontaktformulars
+
+1. Navigieren Sie zur Live-Website
+2. Füllen Sie das Kontaktformular aus und senden Sie es
+3. Überprüfen Sie, ob Sie eine Bestätigungs-E-Mail erhalten und die Nachricht an die Admin-E-Mail zugestellt wird
 
 ## Lokale Entwicklung
 
-1. Klone das Repository
-2. Erstelle eine `.env`-Datei basierend auf `.env.example`
-3. Füge deinen Resend API-Schlüssel in die `.env`-Datei ein
-4. Starte einen lokalen Webserver (z.B. mit `npx serve`)
+Für die lokale Entwicklung:
 
-## Deployment
+1. Klonen Sie das Repository:
+   ```bash
+   git clone https://github.com/ihr-benutzername/kanid-website.git
+   cd kanid-website
+   ```
 
-Das Projekt wird automatisch über IONOS Deploy Now deployed, wenn Änderungen im Repository gepusht werden.
+2. Installieren Sie die Abhängigkeiten:
+   ```bash
+   npm install
+   ```
 
-Die Konfiguration ist in der `.ionos.yaml`-Datei definiert.
+3. Stellen Sie sicher, dass der API-Schlüssel in der Datei `api/kontakt.js` korrekt eingetragen ist
+4. Verwenden Sie einen lokalen Server zum Testen der statischen Dateien
 
-### API-Konfiguration
+## Fehlersuche
 
-Die API für das Kontaktformular basiert auf der Resend-API für E-Mail-Versand. Die Einrichtung erfordert einen API-Schlüssel, der in den GitHub-Secrets oder in der IONOS-Umgebung konfiguriert sein muss.
+Wenn das Kontaktformular nicht funktioniert:
 
-```yaml
-apiRoutes:
-  - path: /api
-    directory: api
-    handler: kontakt.js
-    runtime: node
-```
+1. Überprüfen Sie die Einrichtung von Resend:
+   - Ist der API-Schlüssel in `api/kontakt.js` korrekt eingegeben?
+   - Ist die Domain verifiziert?
 
-### URL-Struktur
+2. Überprüfen Sie die IONOS Deploy Now-Einstellungen:
+   - Ist die Node.js-Version in der `.ionos.yaml` auf mindestens 18 eingestellt?
+   - Wurden die API-Routen korrekt bereitgestellt?
+   - Ist die API-Route in `.ionos.yaml` als `/api/kontakt` definiert?
 
-Die Website verwendet folgende URL-Struktur:
+3. Überprüfen Sie die Browser-Konsole auf JavaScript-Fehler
 
-- `/` oder `/home` - Startseite
-- `/impressum` - Impressum 
-- `/datenschutz` - Datenschutzerklärung
-- `/agb` - Allgemeine Geschäftsbedingungen
-- `/danke` - Danke-Seite nach Kontaktformularversand
-
-Die Weiterleitung wird über die `.htaccess`-Datei konfiguriert.
-
-## Kontaktformular
-
-Das Kontaktformular sendet Daten an die API unter `/api/kontakt`, die die Resend-API verwendet, um:
-
-1. Eine Bestätigungs-E-Mail an den Benutzer zu senden
-2. Eine Benachrichtigungs-E-Mail an den Administrator zu senden
-
-Der API-Schlüssel für Resend muss als Umgebungsvariable `RESEND_API_KEY` konfiguriert sein.
-
-## Wartung
-
-Um Änderungen vorzunehmen:
-
-1. Bearbeite die entsprechenden Dateien
-2. Teste lokal
-3. Pushe die Änderungen zum GitHub-Repository
-4. Die Änderungen werden automatisch auf IONOS Deploy Now bereitgestellt
-
-## Kontakt
-
-Bei Fragen wende dich an info@kanid.de
+Für weitere Informationen siehe die [Resend-Dokumentation](https://resend.com/docs) und die [IONOS Deploy Now-Dokumentation](https://docs.ionos.space/).
