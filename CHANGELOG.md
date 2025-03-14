@@ -1,34 +1,35 @@
 # Changelog
 
-## 2024-07-11: Umfassende Kontaktformular-Aktualisierung
+## Version 1.2.0 - 14.03.2025
+
+### Überarbeitung des Kontaktformulars
+- 🔄 Kontaktformular von EmailJS auf Resend API umgestellt
+- 🧹 Entfernung des nicht mehr benötigten EmailJS-Codes
+- 🔒 Verbesserte Sicherheit und Fehlerbehandlung
+- ✅ 404-Fehlerseite hinzugefügt für verbesserte Benutzererfahrung
+
+### Bereinigung und Optimierung
+- 🧹 Unnötige Dateien im public-Verzeichnis entfernt
+- 📚 Dokumentation aktualisiert
+
+## Version 1.1.0 - 12.03.2025
 
 ### Verbesserungen der Serverless-Funktion (kontakt.js)
+- ✅ Bessere Fehlerbehandlung im API-Handler
+- 🔒 Verstärkte Validierung von Formulardaten
+- 📨 Verbesserte E-Mail-Formatierung 
 
-- ✅ Implementierung des Versands von Bestätigungs-E-Mails an den Absender
-- 🔒 Entfernung des hartcodierten API-Schlüssels aus dem Code
-- 📝 Verbesserung des Loggings für bessere Fehlerdiagnose
-- 🔒 Aktualisierung der CORS-Einstellungen für mehr Sicherheit
-- ✅ Verbesserte Fehlerbehandlung und -meldungen
+### Fehlerbehebungen
+- 🐞 Probleme mit der Darstellung auf mobilen Geräten behoben
+- 🐞 Kontaktformular-Fehlerbehandlung verbessert
+- 🐞 Cookies-Einstellungen auf mobilen Geräten korrigiert
 
-### Frontend-Verbesserungen (index.html)
+## Version 1.0.0 - 09.03.2025
 
-- 🚦 Erweiterte Validierung der Formulardaten vor dem Absenden
-- 📝 Hinzufügung eines Hinweises auf die Bestätigungs-E-Mail in der Erfolgsmeldung
-- 🧹 Entfernung des nicht verwendeten EmailJS-Skripts
-- 🧰 Aktualisierung der API-Endpunkt-Konfiguration
-
-### Sonstige Verbesserungen
-
-- 📝 Aktualisierung der Danke-Seite mit Hinweis auf die Bestätigungs-E-Mail
-- 🔒 Spezifischere CORS-Einstellungen in der netlify.toml-Datei
-- 📚 Erstellung einer ausführlichen Dokumentation zur Resend-Konfiguration
-- 🛠️ Verbesserte Anleitung für lokale Entwicklung
-- 📝 Beispiel-Konfigurationsdateien für lokale Entwicklung hinzugefügt
-- 🔒 Aktualisierung der .gitignore-Datei zum Schutz sensibler Daten
-
-### Nächste Schritte
-
-1. Stellen Sie sicher, dass die Domain kanid.de bei Resend verifiziert ist
-2. Konfigurieren Sie den API-Schlüssel in den Netlify-Umgebungsvariablen
-3. Testen Sie das Formular nach dem Deployment
-4. Überwachen Sie die Logs auf mögliche Fehler 
+### Initiale Veröffentlichung
+- 🎉 Startseite mit Informationen zu Dienstleistungen
+- 👤 Über Uns-Bereich mit Vorstellung
+- 📱 Responsive Design für alle Gerätetypen
+- 📝 Kontaktformular mit E-Mail-Anbindung
+- 🔒 Cookie-Einstellungen und Datenschutz-Funktionalität
+- 📑 Rechtliche Dokumente (Impressum, Datenschutz, AGB)
