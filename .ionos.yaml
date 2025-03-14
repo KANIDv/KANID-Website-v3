@@ -8,6 +8,10 @@ deploy:
   fromDist: true
   output: .
 
+# Umgebungsvariablen für IONOS Deploy Now
+environment:
+  RESEND_API_KEY: "{{secrets.RESEND_API_KEY}}"
+
 # API-Routen von IONOS Deploy Now
 apiRoutes:
   - path: /api
@@ -15,4 +19,4 @@ apiRoutes:
     handler: kontakt.js
     runtime: node:18
     environment:
-      RESEND_API_KEY: ${RESEND_API_KEY}
+      - RESEND_API_KEY
