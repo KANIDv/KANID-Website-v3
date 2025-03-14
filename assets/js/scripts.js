@@ -315,19 +315,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const expandedContents = {
         'konstruktionsberatung': {
             text: 'Für ein mittelständisches Unternehmen in Gerlingen haben wir Konstruktionsmodelle und Zeichnungen individuell angepasst. Anschließend wurden die überarbeiteten Daten direkt in das unternehmensinterne ERP-System proALPHA integriert, was die Arbeitsprozesse effizienter gestaltet und die Produktionsplanung unterstützt hat.',
-            image: '../img/services/Konstruktionsberatung.jpg'
+            image: '../assets/img/services/Konstruktionsberatung.jpg'
         },
         'prozessoptimierung': {
             text: 'Für ein PV-Installationsunternehmen in Ostfildern haben wir die Projektmanagementsoftware HERO erfolgreich eingeführt. Dabei wurden die bestehenden Prozesse präzise in der Software abgebildet und mittels einer API-Schnittstelle mit Microsoft Teams verbunden. Zusätzlich haben wir die Mitarbeiter umfassend geschult, um einen reibungslosen Übergang und den effektiven Einsatz der neuen Lösung sicherzustellen.',
-            image: '../img/services/prozess-detail.jpg'
+            image: '../assets/img/services/prozess-detail.jpg'
         },
         'aftersales': {
             text: 'Für ein Unternehmen in Stuttgart haben wir ein modernes Ticketsystem für Reklamationen eingeführt. Ein benutzerfreundliches Formular auf der Homepage ermöglicht es den Kunden, ihre Beschwerden direkt zu übermitteln. Sobald das Formular ausgefüllt wurde, wird automatisch eine Aufgabe für den zuständigen Mitarbeiter erstellt, ein Ticket generiert und eine Bestätigungsmail an den Kunden versendet. Mithilfe von PowerAutomate, MS Forms und MS Tasks konnte so eine effiziente und transparente Bearbeitung des Reklamationsprozesses realisiert werden.',
-            image: '../img/services/aftersales-detail.jpg'
+            image: '../assets/img/services/aftersales-detail.jpg'
         },
         '3d-druck': {
             text: 'Für einen Rasenmäherhersteller haben wir Prototypen für das Antriebsrad konstruiert, im 3D-Druckverfahren hergestellt und ausgiebig getestet. So konnten wir schnell Optimierungspotenziale identifizieren und den Entwicklungsprozess effizient vorantreiben.',
-            image: '../img/services/3d-druck-detail.jpg'
+            image: '../assets/img/services/3d-druck-detail.jpg'
         }
     };
 

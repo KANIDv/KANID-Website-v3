@@ -1,0 +1,13 @@
+{
+  "name": "kanid-api",
+  "version": "1.0.0",
+  "description": "API-Routen für die KANID Website",
+  "main": "kontakt.js",
+  "type": "commonjs",
+  "dependencies": {
+    "resend": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+} 

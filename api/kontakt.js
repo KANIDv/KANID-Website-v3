@@ -1,10 +1,10 @@
 // API-Handler für das KANID Kontaktformular
 // Verarbeitet eingehende Anfragen und sendet E-Mails via Resend API
 
-import { Resend } from 'resend';
+const { Resend } = require('resend');
 
 // API-Schlüssel direkt im Code (ersetzen Sie diesen durch Ihren tatsächlichen Resend API-Key)
-const RESEND_API_KEY = "re_123456YourActualKeyHere";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key von Resend
+const RESEND_API_KEY = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";  // WICHTIG: Ersetzen Sie dies mit Ihrem echten API-Key von Resend
 
 // Konfiguration
 const CONFIG = {
@@ -23,8 +23,8 @@ function isValidEmail(email) {
 }
 
 // Handler-Funktion für HTTP-Anfragen
-export default async function handler(req, res) {
-  // CORS-Headers für Anfragen von allen Ursprüngen
+module.exports = async function(req, res) {
+  // CORS-Header
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -36,17 +36,17 @@ export default async function handler(req, res) {
 
   // Nur POST-Anfragen erlauben
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Nur POST-Methode ist erlaubt' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    console.log('Kontaktformular-Anfrage empfangen');
-
-    // Formulardaten extrahieren und validieren
-    let { name, email, subject, message } = {};
+    console.log('Anfrage empfangen');
+    
+    // Formulardaten extrahieren
+    let name, email, subject, message;
     
     try {
-      // Bei IONOS Deploy Now kann es vorkommen, dass der Body als String vorliegt
+      // Body-Parsing-Logik
       if (typeof req.body === 'string') {
         const parsedBody = JSON.parse(req.body);
         name = parsedBody.name;
@@ -54,98 +54,55 @@ export default async function handler(req, res) {
         subject = parsedBody.subject;
         message = parsedBody.message;
       } else {
-        // Standardfall: Body ist bereits geparst
         ({ name, email, subject, message } = req.body);
       }
     } catch (parseError) {
-      console.error('Fehler beim Parsen des Request-Body:', parseError);
-      return res.status(400).json({ message: 'Ungültiges Anforderungsformat. Bitte stellen Sie sicher, dass Sie gültiges JSON senden.' });
+      console.error('Parsing-Fehler:', parseError);
+      return res.status(400).json({ error: 'Ungültiges Format' });
     }
-
-    // Eingabevalidierung
-    if (!name || !email || !subject || !message) {
-      console.log('Unvollständige Formulardaten:', { name, email, subject, message: message ? 'vorhanden' : 'fehlt' });
-      return res.status(400).json({ message: 'Alle Felder sind erforderlich' });
-    }
-
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ message: 'Bitte geben Sie eine gültige E-Mail-Adresse ein' });
-    }
-
-    console.log('Sende E-Mail mit Resend API');
     
-    try {
-      // Resend API initialisieren
-      const resend = new Resend(RESEND_API_KEY);
-
-      // E-Mail an den Administrator senden
-      const adminEmailData = await resend.emails.send({
-        from: `${CONFIG.FROM_NAME} <${CONFIG.FROM_EMAIL}>`,
-        to: CONFIG.ADMIN_EMAIL,
-        subject: `Neue Kontaktanfrage: ${subject}`,
-        html: `
-          <h2>Neue Kontaktanfrage von der KANID Website</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>E-Mail:</strong> ${email}</p>
-          <p><strong>Betreff:</strong> ${subject}</p>
-          <p><strong>Nachricht:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
-        `,
-      });
-
-      console.log('Admin-E-Mail gesendet, ID:', adminEmailData?.id);
-
-      // Bestätigungs-E-Mail an den Absender senden
-      const userEmailData = await resend.emails.send({
-        from: `${CONFIG.FROM_NAME} <${CONFIG.FROM_EMAIL}>`,
-        to: email,
-        subject: `Ihre Kontaktanfrage an KANID UG`,
-        html: `
-          <h2>Vielen Dank für Ihre Nachricht!</h2>
-          <p>Sehr geehrte(r) ${name},</p>
-          <p>vielen Dank für Ihre Kontaktanfrage. Wir haben Ihre Nachricht erhalten und werden uns schnellstmöglich bei Ihnen melden.</p>
-          <p><strong>Ihre Nachricht:</strong></p>
-          <p><em>${message.replace(/\n/g, '<br>')}</em></p>
-          <p>Mit freundlichen Grüßen,<br>Ihr KANID UG Team</p>
-          <hr>
-          <p style="font-size: 12px; color: #666;">
-            KANID UG (haftungsbeschränkt)<br>
-            Holderäckerstraße 3<br>
-            70839 Gerlingen<br>
-            Tel: +49 1520 7921611<br>
-            E-Mail: info@kanid.de<br>
-            Web: <a href="https://kanid.de">kanid.de</a>
-          </p>
-        `,
-      });
-
-      console.log('Benutzer-E-Mail gesendet, ID:', userEmailData?.id);
-
-      // Erfolgreiche Antwort zurücksenden
-      return res.status(200).json({ 
-        message: 'Nachricht erfolgreich gesendet',
-        adminEmailId: adminEmailData?.id,
-        userEmailId: userEmailData?.id
-      });
-    } catch (emailError) {
-      console.error('Fehler beim Senden der E-Mail mit Resend:', emailError);
-      throw emailError; // Weitergeben an die äußere Fehlerbehandlung
+    // Validierung
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ error: 'Alle Felder erforderlich' });
     }
+    
+    console.log('Sende E-Mail...');
+    
+    // Resend initialisieren
+    const resend = new Resend(RESEND_API_KEY);
 
+    // E-Mail senden
+    const data = await resend.emails.send({
+      from: 'KANID UG Kontaktformular <kontakt@kanid.de>',
+      to: 'info@kanid.de',
+      subject: `Neue Anfrage: ${subject}`,
+      html: `
+        <h2>Neue Kontaktanfrage</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>E-Mail:</strong> ${email}</p>
+        <p><strong>Betreff:</strong> ${subject}</p>
+        <p><strong>Nachricht:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `
+    });
+    
+    console.log('E-Mail gesendet, ID:', data.id);
+    
+    // Erfolgsantwort
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Nachricht gesendet' 
+    });
+    
   } catch (error) {
-    // Fehlerbehandlung
-    console.error('Fehler beim Verarbeiten der Kontaktanfrage:', error);
+    // Ausführliche Fehlerprotokollierung
+    console.error('Fehler:', error);
     console.error('Fehlerdetails:', error.stack);
     
-    if (error.message && error.message.includes('API key')) {
-      return res.status(500).json({ 
-        message: 'Authentifizierungsproblem mit dem E-Mail-Dienst. Bitte kontaktieren Sie uns direkt per E-Mail an info@kanid.de.',
-      });
-    }
-    
+    // Benutzerfreundliche Antwort
     return res.status(500).json({ 
-      message: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      error: 'Serverfehler', 
+      message: 'Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.'
     });
   }
-}
+}; 

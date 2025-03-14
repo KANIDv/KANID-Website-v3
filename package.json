@@ -2,7 +2,7 @@
   "name": "kanid-website",
   "version": "1.0.0",
   "description": "Website und Kontaktformular der KANID UG",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "echo 'Build erfolgreich' > build.log"
   },

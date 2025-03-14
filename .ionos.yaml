@@ -14,3 +14,7 @@ apiRoutes:
     directory: api
     handler: kontakt.js
     runtime: node:18
+    installCmd: npm install
+    # Umgebungsvariablen falls nötig (optional)
+    environment:
+      NODE_ENV: production 

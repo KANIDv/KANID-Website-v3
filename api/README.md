@@ -68,7 +68,7 @@ Um den API-Schlüssel zu ändern, bearbeiten Sie die Datei `api/kontakt.js` und 
 1. Stellen Sie sicher, dass die Node.js-Version in der `.ionos.yaml` auf mindestens 18 eingestellt ist:
    ```yaml
    apiRoutes:
-     - path: /api/kontakt
+     - path: /api
        directory: api
        handler: kontakt.js
        runtime: node:18
@@ -81,4 +81,4 @@ Um den API-Schlüssel zu ändern, bearbeiten Sie die Datei `api/kontakt.js` und 
 Um die API lokal zu testen:
 
 1. Stellen Sie sicher, dass der API-Schlüssel in der Datei `api/kontakt.js` korrekt eingetragen ist
-2. Führen Sie einen lokalen Entwicklungsserver aus, der Serverless-Funktionen unterstützt
+2. Führen Sie einen lokalen Entwicklungsserver aus, der Serverless-Funktionen unterstützt 
