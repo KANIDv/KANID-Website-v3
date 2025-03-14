@@ -1,8 +1,5 @@
-// EmailJS Kontaktformular-Funktionalität
+// Kontaktformular mit API-Anbindung für Resend
 document.addEventListener('DOMContentLoaded', function() {
-    // EmailJS initialisieren
-    emailjs.init("CXo-0j7h5Uf3BqfaH"); // Korrekter User ID für EmailJS
-    
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
@@ -47,22 +44,32 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Wird gesendet...';
             submitButton.disabled = true;
             
-            // EmailJS Parameter vorbereiten
-            const templateParams = {
+            // Daten für den API-Request vorbereiten
+            const formData = {
                 name: name,
                 email: email,
                 subject: subject,
                 message: message
             };
             
-            // EmailJS Service und Template IDs hier eintragen
-            emailjs.send(
-                'service_qrnw51e',  // Service ID
-                'template_7fy7aov', // Template ID
-                templateParams
-            )
-            .then(function(response) {
-                console.log('E-Mail erfolgreich gesendet!', response.status, response.text);
+            // API-Anfrage an den Server senden
+            fetch('/api/kontakt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.message || 'Ein unbekannter Fehler ist aufgetreten');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Anfrage erfolgreich:', data);
                 
                 // Formular zurücksetzen
                 contactForm.reset();
@@ -75,16 +82,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.location.href = '/danke';
                 }, 3000);
             })
-            .catch(function(error) {
-                console.error('Fehler beim Senden der E-Mail:', error);
-                errorMessage.textContent = 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.';
+            .catch(error => {
+                console.error('Fehler beim Senden der Anfrage:', error);
+                errorMessage.textContent = error.message || 'Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.';
                 errorMessage.style.display = 'block';
             })
-            .finally(function() {
+            .finally(() => {
                 // Button wieder aktivieren
                 submitButton.textContent = originalButtonText;
                 submitButton.disabled = false;
             });
         });
     }
-}); 
+});
