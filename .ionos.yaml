@@ -1,32 +1,8 @@
 ---
 # IONOS Deploy Now Konfiguration
-distFolder: .
-deploy:
-  # Verzeichnis, in dem die statischen Dateien liegen
-  fromDist: true
-  output: .
-
-# API-Routen von IONOS Deploy Now
-apiRoutes:
-  - path: /api/minimal
-    directory: api
-    handler: minimal.js
-    runtime: node:18
-    
-  - path: /api/kontakt
-    directory: api
-    handler: kontakt.js
-    runtime: node:18
-    installCmd: cd api && npm install
-    # Umgebungsvariablen
-    environment:
-      NODE_ENV: production
-      DEBUG: "true"
-      
-  - path: /api/test
-    directory: api
-    handler: test.js
-    runtime: node:18
-    installCmd: cd api && npm install
-    environment:
-      NODE_ENV: production 
+setup:
+  name: static
+  type: static
+  buildConfig:
+    dist: /
+    cmd: false 
