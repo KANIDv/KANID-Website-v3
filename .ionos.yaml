@@ -5,4 +5,9 @@ setup:
   type: static
   buildConfig:
     dist: /
-    cmd: false 
+    cmd: false
+  routes:
+    - path: api/kontakt
+      directory: api
+      handler: kontakt.js
+      runtime: node:18 
