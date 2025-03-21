@@ -38,6 +38,10 @@ section[id] {
     scroll-snap-align: start !important;
     scroll-snap-stop: always !important;
     min-height: 100vh;
+    padding-top: 80px; /* Mehr Platz oben für bessere Positionierung */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Änderung von center zu flex-start */
 }
 
 body {
@@ -437,21 +441,18 @@ body {
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    gap: 4rem;
-    margin-top: 3rem;
-    min-height: calc(100vh - 200px);
-    min-height: auto;
-    margin-top: 2rem;
     gap: 3rem;
+    margin-top: 2rem;
 }
 
 .contact-form {
-    display: grid;
-    gap: 1rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 2.5rem;
-    border-radius: 15px;
+    flex: 1 1 500px;
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px; /* Garantiert, dass es Abstand zum unteren Rand hat */
+    
 }
 
 .contact-info {
@@ -487,8 +488,7 @@ body {
 }
 
 .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
+    min-height: 200px; /* Reduzierte Höhe */
 }
 
 /* Formularfelder verschönern */
@@ -511,7 +511,7 @@ body {
 
 .form-group textarea {
     resize: vertical;
-    min-height: 150px;
+
 }
 
 .submit-button {
@@ -817,6 +817,22 @@ section.show {
     
     .desktop-title {
         display: none;
+    }
+
+    #kontakt {
+        padding-top: 60px;
+    }
+    
+    .contact-container {
+        padding: 15px;
+    }
+    
+    .contact-form {
+        padding: 20px;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
     }
 }
 
