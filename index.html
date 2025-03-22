@@ -11,8 +11,28 @@
     <meta name="geo.placename" content="Gerlingen">
     <title>KANID UG - Technische Beratung & Konstruktion | Gerlingen, Stuttgart</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicon/safari-pinned-tab.svg" color="#1b6ba4">
+    <meta name="msapplication-TileColor" content="#1b6ba4">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico">
+    
     <link rel="canonical" href="https://kanid.de/">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="KANID UG - Technische Beratung & Konstruktion">
+    <meta property="og:description" content="Ihr Spezialist für Konstruktionsberatung, Prozessoptimierung, Aftersales-Konzepte und 3D-Druck Service in Stuttgart und Umgebung.">
+    <meta property="og:image" content="https://kanid.de/assets/img/favicon/og-image.jpg">
+    <meta property="og:url" content="https://kanid.de/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KANID UG - Technische Beratung & Konstruktion">
+    <meta name="twitter:description" content="Ihr Spezialist für Konstruktionsberatung, Prozessoptimierung, Aftersales-Konzepte und 3D-Druck Service.">
+    <meta name="twitter:image" content="https://kanid.de/assets/img/favicon/og-image.jpg">
     
     <!-- Technische Optimierungen -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,46 +49,38 @@
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      "name": "KANID UG",
-      "image": "/assets/img/LOGO.png",
+      "name": "KANID UG (haftungsbeschränkt)",
+      "image": "https://kanid.de/assets/img/LOGO.png",
       "url": "https://kanid.de",
-      "telephone": "+4915207921611",
-      "email": "info@kanid.de",
+      "telephone": "+4917643377742",
+      "email": "mail@kanid.de",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Holderäckerstraße 3",
         "addressLocality": "Gerlingen",
         "postalCode": "70839",
-        "addressRegion": "Baden-Württemberg",
         "addressCountry": "DE"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "48.7981",
-        "longitude": "9.0675"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/kanid/",
-        "https://www.xing.com/pages/kanid-ug-haftungsbeschraenkt"
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
       ],
-      "priceRange": "$$",
-      "servesCuisine": "Construction Services, Technical Consulting"
+      "keywords": "Konstruktionsberatung, CAD-Konstruktion, Prozessoptimierung, Aftersales, 3D-Druck, Stuttgart, Gerlingen",
+      "description": "KANID UG - Ihr Spezialist für Konstruktionsberatung, Prozessoptimierung, Aftersales-Konzepte und 3D-Druck Service in Stuttgart und Umgebung."
     }
     </script>
 </head>
-<body>
+<body class="home-page">
     <header class="header">
         <div class="header-bg"></div>
         <nav class="navbar">
@@ -79,280 +91,335 @@
                 <span class="hamburger"></span>
             </button>
             <div class="nav-buttons">
-                <!-- Hauptnavigation -->
-                <div class="nav-section main-nav">
-                    <a href="/" class="nav-button">Home</a>
-                    <a href="#leistungen" class="nav-button">Leistungen</a>
-                    <a href="#ueber-uns" class="nav-button">Über uns</a>
-                    <a href="#kontakt" class="nav-button">Kontakt</a>
-                </div>
-                
-                <!-- Rechtliche Links (nur mobil sichtbar) -->
-                <div class="nav-section legal-nav">
-                    <a href="/impressum" class="nav-button">Impressum</a>
-                    <a href="/agb" class="nav-button">AGB's</a>
-                    <a href="/datenschutz" class="nav-button">Datenschutz</a>
-                    <button id="mobile-cookie-settings" class="nav-button">Cookie-Einstellungen</button>
-                </div>
+                <a href="/" class="nav-button">Home</a>
+                <a href="#section-leistungen" class="nav-button">Leistungen</a>
+                <a href="#section-ueber-mich" class="nav-button">Über mich</a>
+                <a href="#section-kontakt" class="nav-button">Kontakt</a>
+                <a href="/datenschutz.html" class="nav-button small">Datenschutz</a>
+                <a href="/impressum.html" class="nav-button small">Impressum</a>
+                <a href="/agb.html" class="nav-button small">AGB</a>
             </div>
         </nav>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Willkommen bei <span class="highlight">KANID UG</span></h1>
+            <p class="hero-subtitle">Technische Beratung & Konstruktion mit Praxiserfahrung</p>
+            <div class="hero-buttons">
+                <a href="#section-kontakt" class="button primary">Kontakt</a>
+                <a href="#section-leistungen" class="button secondary">Leistungen</a>
+            </div>
+        </div>
     </header>
-
+    
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <h1>Willkommen bei KANID</h1>
-                <p class="hero-subtitle">Ihr Spezialist für Konstruktionsberatung, Prozessoptimierung und 3D-Druck in Stuttgart & Umgebung</p>
-                <a href="#kontakt" class="cta-button">Jetzt Kontakt aufnehmen</a>
-            </div>
-        </section>
-
-        <!-- Leistungen Section -->
-        <section id="leistungen" class="services-section">
-            <div class="title-container">
-                <h2>
-                    <span class="desktop-title">Unsere Fachdienstleistungen im Überblick</span>
-                    <span class="mobile-title">Unsere Leistungen</span>
-                </h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <img src="/assets/img/icons/konstruktion-icon.svg" alt="CAD-Konstruktion und SolidWorks Design für Maschinenbau von KANID">
-                    </div>
-                    <h3>CAD-Konstruktionsberatung</h3>
-                    <p>Professionelle CAD-Konstruktion & Design mit SolidWorks und OnShape, Erstellung präziser Fertigungszeichnungen, vollständiger Stücklisten und funktionaler Prototypen. Inklusive Festigkeitsberechnungen und Optimierung von Metallkonstruktionen für maximale Effizienz.</p>
-                    <a href="javascript:void(0);" class="service-link">Mehr erfahren</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <img src="/assets/img/icons/process-icon.svg" alt="Lean Manufacturing und Prozessoptimierung für Industriebetriebe">
-                    </div>
-                    <h3>Prozess- und Produktionsoptimierung</h3>
-                    <p>Effizientes Lean Manufacturing speziell für metallverarbeitende Betriebe, strukturierte Prozessoptimierung und nahtlose Einführung neuer Softwarelösungen. Inklusive umfassender Mitarbeiterschulung und Implementation von Qualitätsmanagementsystemen.</p>
-                    <a href="javascript:void(0);" class="service-link">Mehr erfahren</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <img src="/assets/img/icons/service-icon.svg" alt="Professionelle Aftersales- und Servicekonzepte für Maschinenbau">
-                    </div>
-                    <h3>Aftersales- und Servicekonzepte</h3>
-                    <p>Maßgeschneidertes Reklamations- und Beschwerdemanagement, strategische Optimierung der Kundenservice-Strukturen und zielgerichtete Mitarbeiterschulungen für den PV- und Maschinenbausektor mit messbarer Kundenzufriedenheitssteigerung.</p>
-                    <a href="javascript:void(0);" class="service-link">Mehr erfahren</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <img src="/assets/img/icons/3d-print-icon.svg" alt="Professioneller 3D-Druck Service und Prototypenbau">
-                    </div>
-                    <h3>3D-Druck & Additive Fertigung</h3>
-                    <p>Hochpräziser Prototypenbau, wirtschaftliche Fertigung von Kleinserien und kundenspezifischen Sonderlösungen. Umfassende Beratung zur Integration von 3D-Drucktechnologien in Ihre bestehenden Produktionsprozesse.</p>
-                    <a href="javascript:void(0);" class="service-link">Mehr erfahren</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Über uns Section -->
-        <section id="ueber-uns" class="about-section">
-            <div class="about-content">
-                <!-- Team-Karte -->
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="/assets/img/konstantin.jpg" alt="Konstantin Vinogradov" class="profile-image">
-                    </div>
-                    <h3>Konstantin Vinogradov</h3>
-                    <p>Geschäftsführer</p>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/konstantin-vinogradov-675bb8265" target="_blank" rel="noopener">
-                            <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                <path fill="currentColor" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                        </a>
-                    </div>
+        <section id="section-leistungen" class="section services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Meine Leistungen</h2>
+                    <p class="section-subtitle">Technische Expertise für Ihre Projekte</p>
                 </div>
                 
-                <!-- About Text -->
-                <div class="about-text">
-                    <h2>Über uns</h2>
-                    <p><strong>Herzlich willkommen bei KANID!</strong></p>
-                    <p>Mein Name ist <strong>Konstantin Vinogradov</strong>, Gründer & Geschäftsführer von KANID. Mit KANID biete ich Unternehmen im Großraum Stuttgart maßgeschneiderte Lösungen in den Bereichen Konstruktion, Prozessoptimierung und additive Fertigung. Unser Fokus liegt darauf, <em>innovative Ansätze mit praxisnaher Umsetzung</em> zu verbinden, um Effizienz und Qualität in der Industrie nachhaltig zu steigern.</p>
-                    <h4>Fachwissen & Kompetenz</h4>
-                    <p>Meine berufliche Laufbahn begann im Metall- und Maschinenbau in der Region Stuttgart, wo ich als Industriemechaniker tiefgehende Einblicke in Fertigungsprozesse und technische Abläufe erhielt. Durch meine Tätigkeit als Konstrukteur mit Schwerpunkt auf CAD-gestützter Entwicklung konnte ich mein technisches Know-how weiter ausbauen. Später übernahm ich als Standortleiter und Head of Aftersales Verantwortung für die Optimierung von Prozessen, die Einführung neuer Technologien und die Schulung von Teams. Über die Jahre entwickelte sich meine Begeisterung für additive Technologien. Der 3D-Druck eröffnet völlig neue Möglichkeiten in der Produktentwicklung, im Prototypenbau und in der Kleinserienfertigung, wodurch Produktionsprozesse flexibler und effizienter gestaltet werden können. Mit KANID unterstütze ich Unternehmen aus Gerlingen, Stuttgart und ganz Baden-Württemberg nicht nur bei der technischen Umsetzung, sondern auch bei der strategischen Integration von 3D-Druck-Technologien in bestehende Fertigungsabläufe.</p>
-                    <h4>Unser Ansatz</h4>
-                    <p>Mit KANID bringe ich diese vielseitige Erfahrung in eine beratende Rolle ein, um Unternehmen dabei zu unterstützen, technologische Herausforderungen zu meistern und ihre Produktionsabläufe zukunftssicher zu gestalten. Dabei steht nicht nur die technische Optimierung im Mittelpunkt, sondern auch die strategische Entwicklung individueller Lösungen, die nachhaltigen Mehrwert schaffen.</p>
-                    <p><em>Ich freue mich darauf, mit Ihnen gemeinsam neue Möglichkeiten zu erschließen und Ihr Unternehmen auf dem Weg zu mehr Effizienz und Innovation zu begleiten!</em></p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 16V7.5C21 7.22 20.78 7 20.5 7H9.5C9.22 7 9 7.22 9 7.5V16H21M8 16H3V5C3 4.45 3.45 4 4 4H6C6.55 4 7 4.45 7 5V16M7 18V20H3V18H7M21 18V20H9V18H21Z" /></svg>
+                        </div>
+                        <h3>CAD-Konstruktionsberatung</h3>
+                        <p>Ich biete Beratung bei technischen Problemstellungen in der Konstruktion oder stehe Ihnen für Ihre CAD-Konstruktionen zur Verfügung, insbesondere mit SolidWorks.</p>
+                        <a href="#section-kontakt" class="button text">Mehr erfahren</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 9H21.5L16 3.5V9M7 2H17L23 8V18C23 19.11 22.11 20 21 20H7C5.9 20 5 19.1 5 18V4C5 2.9 5.9 2 7 2M7 24H3C1.9 24 1 23.1 1 22V6H3V22H7V24M19 13H9V19H19V13Z" /></svg>
+                        </div>
+                        <h3>Prozessoptimierung</h3>
+                        <p>Ich helfe Ihnen dabei, Ihre Arbeitsprozesse zu optimieren, Dokumentationsstandards zu etablieren und einheitliche Teilenummernsysteme zu implementieren.</p>
+                        <a href="#section-kontakt" class="button text">Mehr erfahren</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H14.82C14.4 1.84 13.3 1 12 1S9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M12 3C12.55 3 13 3.45 13 4S12.55 5 12 5 11 4.55 11 4 11.45 3 12 3M7 7H17V5H19V19H5V5H7V7M12 17V15H17V17H12M12 11V9H17V11H12M8 9H10V11H8V9M8 15H10V17H8V15Z" /></svg>
+                        </div>
+                        <h3>Aftersales Service-Konzepte</h3>
+                        <p>Ich entwickle Lösungen für Ihre Aftersales-Prozesse: Von der Ersatzteilidentifikation bis zur optimalen Bereitstellung von Dokumentationen für Ihre Kunden.</p>
+                        <a href="#section-kontakt" class="button text">Mehr erfahren</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.8 18.4L14 10.67V6.5L15.2 4.5V3.5H8.8V4.5L10 6.5V10.67L4.2 18.4C3.53 19.45 4.28 21 5.6 21H18.4C19.73 21 20.47 19.45 19.8 18.4M7.67 18.5L13 9.07V7L12 5.5V5H12.5L13 5.5H11L11.5 5H12V5.5L11 7V9.07L16.33 18.5H7.67Z" /></svg>
+                        </div>
+                        <h3>3D-Druck Service</h3>
+                        <p>Ich biete Ihnen präzisen 3D-Druck für Prototypen, Ersatzteile oder kleine Serien mit verschiedenen Materialien und Technologien.</p>
+                        <a href="#section-kontakt" class="button text">Mehr erfahren</a>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Kontakt Section -->
-        <section id="kontakt" class="contact-section">
-            <div class="title-container">
-                <h2>Kontakt</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Direkte Kontaktaufnahme</h3>
-                    <p>Telefon: <a href="tel:+4915207921611">+49 1520 7921611</a></p>
-                    <p>E-Mail: <a href="mailto:info@kanid.de">info@kanid.de</a></p>
-                    <p>Adresse: <a href="https://maps.google.com/?q=Holderäckerstraße+3,+70839+Gerlingen" target="_blank">Holderäckerstraße 3, 70839 Gerlingen</a> (Großraum Stuttgart)</p>
-                    <p>Geschäftszeiten: Mo-Fr 8:00-16:00 Uhr</p>
-                    <p>Einzugsgebiet: Stuttgart, Ludwigsburg, Böblingen, Esslingen und Region</p>
+        
+        <section id="section-ueber-mich" class="section about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Über mich</h2>
+                    <p class="section-subtitle">Erfahrung und Kompetenz, die zählt</p>
                 </div>
-                <form class="contact-form" id="contactForm">
-                    <div id="form-error" class="form-error" style="display: none; color: #e74c3c; background: #fbe9e7; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
-                        Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.
+                
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="/assets/img/konstantin.jpg" alt="Konstantin Vinogradov" loading="lazy">
                     </div>
-                    <div id="form-success" style="display: none; color: #2ecc71; background: #e8f8f5; padding: 10px; margin-bottom: 15px; border-radius: 4px;">
-                        Ihre Nachricht wurde erfolgreich gesendet! Wir werden uns so schnell wie möglich bei Ihnen melden. 
-                        Eine Bestätigungs-E-Mail wurde an Ihre angegebene E-Mail-Adresse gesendet.
+                    <div class="about-text">
+                        <h3>Konstantin Vinogradov</h3>
+                        <p class="about-role">Geschäftsführer & Technischer Berater</p>
+                        <p>Mit langjähriger Erfahrung im Bereich Maschinenbau und CAD-Konstruktion biete ich umfassende technische Beratung für Ihr Unternehmen. Meine praxisnahe Arbeit in namhaften Unternehmen ermöglicht es mir, effiziente und realistische Lösungen für Ihre Herausforderungen zu entwickeln.</p>
+                        <p>Als Ingenieur mit Schwerpunkt Konstruktion verstehe ich die Anforderungen moderner Produktentwicklung und kann Sie gezielt bei der Optimierung Ihrer Prozesse unterstützen. Ich lege großen Wert auf eine langfristige Zusammenarbeit und entwickle maßgeschneiderte Konzepte, die perfekt zu Ihrem Unternehmen passen.</p>
+                        <div class="about-info">
+                            <div class="info-item">
+                                <span class="info-label">Standort:</span>
+                                <span class="info-value">Gerlingen (bei Stuttgart)</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">E-Mail:</span>
+                                <span class="info-value">mail@kanid.de</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
+                </div>
+            </div>
+        </section>
+        
+        <section id="section-kontakt" class="section contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kontakt</h2>
+                    <p class="section-subtitle">Lassen Sie uns gemeinsam Ihr Projekt besprechen</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5M12 2C7.03 2 3 6.03 3 11C3 15.03 5.75 20.5 12 22C18.25 20.5 21 15.03 21 11C21 6.03 16.97 2 12 2Z" /></svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Adresse</h3>
+                                <p>KANID UG (haftungsbeschränkt)<br>Holderäckerstraße 3<br>70839 Gerlingen</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>E-Mail</h3>
+                                <p><a href="mailto:mail@kanid.de">mail@kanid.de</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Telefon</h3>
+                                <p><a href="tel:+4917643377742">+49 176 4337 7742</a></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">E-Mail:</label>
-                        <input type="email" id="email" name="email" required>
+                    
+                    <div class="contact-form-container">
+                        <form id="contact-form" class="contact-form" action="/api/formHandler" method="POST">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">E-Mail *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Betreff *</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message">Nachricht *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width checkbox-group">
+                                <input type="checkbox" id="privacy" name="privacy" required>
+                                <label for="privacy">Ich habe die <a href="/datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und akzeptiere diese. *</label>
+                            </div>
+                            
+                            <div class="form-group full-width recaptcha-container">
+                                <div id="recaptcha-placeholder"></div>
+                            </div>
+                            
+                            <div class="form-button-container">
+                                <button type="submit" class="button primary">Nachricht senden</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="subject">Betreff:</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Nachricht:</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Nachricht senden</button>
-                </form>
+                </div>
             </div>
         </section>
     </main>
-
+    
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <a href="/">
-                    <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="footer-logo-img">
-                </a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="/">
+                        <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="logo">
+                    </a>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#section-leistungen">Leistungen</a></li>
+                            <li><a href="#section-ueber-mich">Über mich</a></li>
+                            <li><a href="#section-kontakt">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Rechtliches</h4>
+                        <ul>
+                            <li><a href="/impressum.html">Impressum</a></li>
+                            <li><a href="/datenschutz.html">Datenschutz</a></li>
+                            <li><a href="/agb.html">AGB</a></li>
+                            <li><a href="/sitemap.html">Sitemap</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Kontakt</h4>
+                        <ul class="contact-list">
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" /></svg>
+                                <a href="mailto:mail@kanid.de">mail@kanid.de</a>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" /></svg>
+                                <a href="tel:+4917643377742">+49 176 4337 7742</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="/impressum">Impressum</a>
-                <a href="/agb">AGB</a>
-                <a href="/datenschutz">Datenschutz</a>
-                <button id="cookie-settings-footer" class="footer-cookie-button">Cookie-Einstellungen</button>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 KANID UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
             </div>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/company/kanid/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://www.xing.com/pages/kanid-ug-haftungsbeschraenkt" target="_blank" rel="noopener">Xing</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 KANID UG. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
-
+    
+    <!-- Scroll Observer -->
     <script>
-        // Smooth Scrolling mit Offset
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                const headerOffset = 80; // Höhe des Headers
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Fehlermeldungen für das Formular anzeigen
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const error = urlParams.get('error');
-            
-            if (error) {
-                const errorElement = document.getElementById('form-error');
-                if (errorElement) {
-                    errorElement.style.display = 'block';
-                    if (error === 'validation') {
-                        errorElement.textContent = 'Bitte füllen Sie alle Felder korrekt aus.';
-                    } else if (error === 'sending') {
-                        errorElement.textContent = 'Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.';
-                    }
-                }
-            }
-        });
-
-        // Intersection Observer für Animationen
+        const sections = document.querySelectorAll('section[id]');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
+                    document.querySelectorAll('.nav-button').forEach(navLink => {
+                        navLink.classList.remove('active');
+                        if (navLink.getAttribute('href') === `#${id}`) {
+                            navLink.classList.add('active');
+                        }
+                    });
                 }
             });
-        });
-
-        document.querySelectorAll('section').forEach((section) => {
+        }, observerOptions);
+        
+        sections.forEach(section => {
             observer.observe(section);
         });
     </script>
-
-    <!-- Am Ende des body-Tags, vor dem schließenden </body> -->
-    <div id="cookie-consent" class="cookie-banner">
-        <div class="cookie-content">
-            <h3>Cookie-Einstellungen</h3>
-            <p>Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>
-            <div class="cookie-buttons">
-                <button id="accept-all-cookies" class="cookie-button accept">Alle akzeptieren</button>
-                <button id="accept-essential-cookies" class="cookie-button essential">Nur essenzielle Cookies</button>
-                <button id="cookie-settings" class="cookie-button settings">Einstellungen</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cookie-settings-modal" class="cookie-modal">
-        <div class="modal-content">
-            <h3>Cookie-Einstellungen</h3>
-            <div class="cookie-options">
-                <div class="cookie-option">
-                    <label>
-                        <input type="checkbox" checked disabled>
-                        <span>Essenzielle Cookies</span>
-                    </label>
-                    <p>Diese Cookies sind für die Grundfunktionen der Website erforderlich.</p>
-                </div>
-                <div class="cookie-option">
-                    <label>
-                        <input type="checkbox" id="analytics-cookies">
-                        <span>Analyse-Cookies</span>
-                    </label>
-                    <p>Diese Cookies helfen uns, die Nutzung der Website zu verstehen und zu verbessern.</p>
-                </div>
-                <div class="cookie-option">
-                    <label>
-                        <input type="checkbox" id="marketing-cookies">
-                        <span>Marketing-Cookies</span>
-                    </label>
-                    <p>Diese Cookies werden verwendet, um Werbung relevanter für Sie zu machen.</p>
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button id="save-preferences" class="cookie-button accept">Einstellungen speichern</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="/assets/js/scripts.js"></script>
     
-    <!-- Kontaktformular -->
-    <script src="/assets/js/contact-form.js"></script>
+    <!-- Cookie Consent -->
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>Diese Website verwendet Cookies, um Ihnen das beste Erlebnis auf unserer Website zu bieten. Mehr erfahren Sie in unserer <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
+            <div class="cookie-buttons">
+                <button id="accept-cookies" class="button primary">Alle akzeptieren</button>
+                <button id="cookie-settings-btn" class="button secondary">Einstellungen</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cookie Settings Modal -->
+    <div id="cookie-settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cookie-Einstellungen</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Hier können Sie auswählen, welche Cookies Sie zulassen möchten. Bitte beachten Sie, dass einige Cookies notwendig sind, damit unsere Website ordnungsgemäß funktioniert.</p>
+                
+                <div class="cookie-option">
+                    <div>
+                        <h4>Notwendige Cookies</h4>
+                        <p>Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.</p>
+                    </div>
+                    <div class="cookie-switch disabled">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider round"></span>
+                    </div>
+                </div>
+                
+                <div class="cookie-option">
+                    <div>
+                        <h4>Analyse-Cookies</h4>
+                        <p>Diese Cookies ermöglichen es uns, Besuche und Verkehrsquellen zu zählen, damit wir die Leistung unserer Website messen und verbessern können.</p>
+                    </div>
+                    <div class="cookie-switch">
+                        <input type="checkbox" id="analytics-cookies">
+                        <span class="slider round"></span>
+                    </div>
+                </div>
+                
+                <div class="cookie-option">
+                    <div>
+                        <h4>Marketing-Cookies</h4>
+                        <p>Diese Cookies werden von unseren Werbepartnern verwendet, um Ihnen relevante Anzeigen anzuzeigen.</p>
+                    </div>
+                    <div class="cookie-switch">
+                        <input type="checkbox" id="marketing-cookies">
+                        <span class="slider round"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-preferences" class="button primary">Präferenzen speichern</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/assets/js/menu.js"></script>
+    <script src="/assets/js/cookies.js"></script>
+    <script src="/assets/js/form-validation.js"></script>
 </body>
 </html>
