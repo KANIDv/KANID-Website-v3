@@ -12,15 +12,7 @@
     <title>KANID UG - Technische Beratung & Konstruktion | Gerlingen, Stuttgart</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
-    <link rel="icon" type="image/png" href="/assets/img/favicon/LOGO.png">
-    <link rel="canonical" href="https://kanid.de/">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="KANID UG - Technische Beratung & Konstruktion">
-    <meta property="og:description" content="Ihr Spezialist für Konstruktionsberatung, Prozessoptimierung und 3D-Druck in Stuttgart & Umgebung">
-    <meta property="og:image" content="https://kanid.de/assets/img/favicon/LOGO.png">
-    <meta property="og:url" content="https://kanid.de/">
-    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://kanid.de/home">
     
     <!-- Technische Optimierungen -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,7 +72,7 @@
     <header class="header">
         <div class="header-bg"></div>
         <nav class="navbar">
-            <a href="/" class="logo-link">
+            <a href="/home" class="logo-link">
                 <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="logo">
             </a>
             <button class="menu-toggle" aria-label="Menü öffnen">
@@ -89,7 +81,7 @@
             <div class="nav-buttons">
                 <!-- Hauptnavigation -->
                 <div class="nav-section main-nav">
-                    <a href="/" class="nav-button">Home</a>
+                    <a href="/home" class="nav-button">Home</a>
                     <a href="#leistungen" class="nav-button">Leistungen</a>
                     <a href="#ueber-uns" class="nav-button">Über uns</a>
                     <a href="#kontakt" class="nav-button">Kontakt</a>
@@ -243,7 +235,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
-                <a href="/">
+                <a href="/home">
                     <img src="/assets/img/LOGO.png" alt="KANID UG Logo" class="footer-logo-img">
                 </a>
             </div>
@@ -259,68 +251,108 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 KANID UG (haftungsbeschränkt). Alle Rechte vorbehalten.</p>
+            <p>&copy; 2024 KANID UG. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
-    <!-- Cookie Consent -->
-    <div id="cookie-consent" class="cookie-consent">
+    <script>
+        // Smooth Scrolling mit Offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const headerOffset = 80; // Höhe des Headers
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fehlermeldungen für das Formular anzeigen
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            
+            if (error) {
+                const errorElement = document.getElementById('form-error');
+                if (errorElement) {
+                    errorElement.style.display = 'block';
+                    if (error === 'validation') {
+                        errorElement.textContent = 'Bitte füllen Sie alle Felder korrekt aus.';
+                    } else if (error === 'sending') {
+                        errorElement.textContent = 'Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.';
+                    }
+                }
+            }
+        });
+
+        // Intersection Observer für Animationen
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        document.querySelectorAll('section').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+
+    <!-- Am Ende des body-Tags, vor dem schließenden </body> -->
+    <div id="cookie-consent" class="cookie-banner">
         <div class="cookie-content">
-            <h3>Wir verwenden Cookies</h3>
-            <p>Diese Website verwendet Cookies, um Ihr Browsererlebnis zu verbessern und personalisierte Inhalte bereitzustellen. Weitere Informationen finden Sie in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+            <h3>Cookie-Einstellungen</h3>
+            <p>Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Weitere Informationen finden Sie in unserer <a href="/datenschutz">Datenschutzerklärung</a>.</p>
             <div class="cookie-buttons">
-                <button id="accept-cookies" class="consent-button primary">Akzeptieren</button>
-                <button id="cookie-settings-btn" class="consent-button secondary">Einstellungen anpassen</button>
+                <button id="accept-all-cookies" class="cookie-button accept">Alle akzeptieren</button>
+                <button id="accept-essential-cookies" class="cookie-button essential">Nur essenzielle Cookies</button>
+                <button id="cookie-settings" class="cookie-button settings">Einstellungen</button>
             </div>
         </div>
     </div>
 
-    <!-- Cookie Settings Modal -->
-    <div id="cookie-settings-modal" class="modal">
+    <div id="cookie-settings-modal" class="cookie-modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>Cookie-Einstellungen</h3>
-                <span class="close-modal">&times;</span>
-            </div>
-            <div class="modal-body">
+            <h3>Cookie-Einstellungen</h3>
+            <div class="cookie-options">
                 <div class="cookie-option">
-                    <div class="option-info">
-                        <strong>Notwendige Cookies</strong>
-                        <p>Diese Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.</p>
-                    </div>
-                    <div class="toggle">
-                        <input type="checkbox" id="necessary-cookies" checked disabled>
-                        <label for="necessary-cookies"></label>
-                    </div>
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        <span>Essenzielle Cookies</span>
+                    </label>
+                    <p>Diese Cookies sind für die Grundfunktionen der Website erforderlich.</p>
                 </div>
                 <div class="cookie-option">
-                    <div class="option-info">
-                        <strong>Funktionale Cookies</strong>
-                        <p>Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung.</p>
-                    </div>
-                    <div class="toggle">
-                        <input type="checkbox" id="functional-cookies">
-                        <label for="functional-cookies"></label>
-                    </div>
-                </div>
-                <div class="cookie-option">
-                    <div class="option-info">
-                        <strong>Analyse-Cookies</strong>
-                        <p>Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren.</p>
-                    </div>
-                    <div class="toggle">
+                    <label>
                         <input type="checkbox" id="analytics-cookies">
-                        <label for="analytics-cookies"></label>
-                    </div>
+                        <span>Analyse-Cookies</span>
+                    </label>
+                    <p>Diese Cookies helfen uns, die Nutzung der Website zu verstehen und zu verbessern.</p>
+                </div>
+                <div class="cookie-option">
+                    <label>
+                        <input type="checkbox" id="marketing-cookies">
+                        <span>Marketing-Cookies</span>
+                    </label>
+                    <p>Diese Cookies werden verwendet, um Werbung relevanter für Sie zu machen.</p>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button id="save-preferences" class="consent-button primary">Einstellungen speichern</button>
+            <div class="modal-buttons">
+                <button id="save-preferences" class="cookie-button accept">Einstellungen speichern</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/scripts.js"></script>
+    
+    <!-- Kontaktformular -->
+    <script src="/assets/js/contact-form.js"></script>
 </body>
 </html>
