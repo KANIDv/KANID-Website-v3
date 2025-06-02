@@ -22,10 +22,23 @@ jobs:
     name: build KANID-Website-v3
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0' # Or a newer compatible version like 8.1, 8.2. Let's use 8.0 as a safe default.
+          extensions: mbstring, xml, ctype, json, iconv # Common extensions, json is important for resend.php
+          tools: composer # Installs composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --prefer-dist
+        # --no-dev: Skips development dependencies.
+        # --optimize-autoloader: Generates an optimized autoloader.
+        # --prefer-dist: Prefers to download distributions (zips) instead of cloning.
 
 # Please do not touch the following action
       - name: Store deployment content
@@ -36,6 +49,6 @@ jobs:
           project-id: 4598aedb-6641-4cbb-9a2e-8d77543caddb
           branch-id: ${{ inputs.branch-id }}
           version: ${{ github.sha }}
-          folder: ${{ env.DEPLOYMENT_FOLDER }}
+          folder: ${{ env.DEPLOYMENT_FOLDER }} # This ensures the 'vendor' folder is included.
           config-file: .deploy-now/KANID-Website-v3/config.yaml
           action: upload

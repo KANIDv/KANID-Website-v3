@@ -4,6 +4,9 @@ RewriteEngine On
 # Set base path
 RewriteBase /
 
+# Allow direct access to resend.php
+RewriteRule ^resend\.php$ - [L,NC]
+
 # Ensure HTTPS
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
