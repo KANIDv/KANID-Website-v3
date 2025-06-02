@@ -24,8 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ",
         ]);
 
+        // Send confirmation email to the sender
+        $params_to_sender = [
+            'from' => 'KANID Kontaktformular <kontakt@kanid.de>',
+            'to' => [$email], // User's email
+            'subject' => 'Bestätigung Ihrer Kontaktanfrage bei KANID',
+            'html' => "<p>Hallo " . htmlspecialchars($name) . ",</p>" .
+                      "<p>vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage bezüglich '" . htmlspecialchars($subject) . "' erhalten und werden uns so schnell wie möglich bei Ihnen melden.</p>" .
+                      "<p>Zur Erinnerung, Ihre Nachricht war:</p>" .
+                      "<p>" . nl2br(htmlspecialchars($message)) . "</p>" . // Ensure message is displayed correctly
+                      "<p>Mit freundlichen Grüßen,</p>" .
+                      "<p>Ihr KANID-Team</p>"
+        ];
+        $resend->emails->send($params_to_sender); // Send the confirmation email
+
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'ok', 'response' => $res]);
+        echo json_encode(['status' => 'ok', 'response' => $res]); // $res here is from the first email, consider if this is an issue. For now, it's as per original logic.
 
     } catch (Exception $e) {
         header('Content-Type: application/json');
