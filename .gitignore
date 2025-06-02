@@ -1,5 +1,5 @@
 # Dependency directories
-node_modules/
+/vendor/
 jspm_packages/
 
 # Build outputs

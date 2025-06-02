@@ -1,13 +1,8 @@
 ---
 # IONOS Deploy Now Konfiguration
 setup:
-  name: static
-  type: static
+  name: KANID-Website-v3 # It's good practice to ensure 'name' is descriptive if it wasn't before, or keep as is if 'static' was just a placeholder for the type. Let's try to keep the original name if possible or use a generic one if 'static' was the actual name. The build log implies KANID-Website-v3
+  type: php
   buildConfig:
-    dist: /
-    cmd: false
-  routes:
-    - path: api/kontakt
-      directory: api
-      handler: kontakt.js
-      runtime: node:18 
+    dist: / # Assuming the root is still the deployment directory.
+    cmd: false # Assuming no specific build command is needed for PHP other than composer install, which will be in the workflow.

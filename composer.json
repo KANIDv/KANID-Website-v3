@@ -1,0 +1,21 @@
+{
+    "name": "kanid/website",
+    "description": "KANID UG Website Contact Form using Resend PHP",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "resend/resend-php": "^0.17.0"
+    },
+    "authors": [
+        {
+            "name": "KANID UG"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
