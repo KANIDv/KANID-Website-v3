@@ -42,29 +42,25 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append("subject", subject);
             formData.append("message", message);
 
-            fetch('resend.php', {
+            fetch('/api/kontakt', {
                 method: 'POST',
                 body: formData,
             })
-            .then(response => response.text())
-            .then(responseText => {
-                console.log('Server-Antwort:', responseText);
-                let jsonResponse;
-                try {
-                    jsonResponse = JSON.parse(responseText);
-                } catch (e) {
-                    throw new Error('Ungültige Server-Antwort erhalten.');
-                }
+            .then(response => response.json()) // Directly parse as JSON
+            .then(jsonResponse => { // jsonResponse is now the parsed object
+                console.log('Server-Antwort:', jsonResponse);
+                // No need for try-catch for JSON.parse, as response.json() handles it
 
-                if (jsonResponse.status === "ok") {
+                if (jsonResponse.success === true) {
                     contactForm.reset();
-                    successMessage.textContent = 'Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden.';
+                    successMessage.textContent = jsonResponse.message || 'Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden.';
                     successMessage.style.display = 'block';
                     setTimeout(() => {
                         window.location.href = '/danke';
                     }, 3000);
                 } else {
-                    throw new Error('Die Nachricht konnte nicht versendet werden.');
+                    // Use message from backend if available
+                    throw new Error(jsonResponse.message || jsonResponse.error || 'Die Nachricht konnte nicht versendet werden.');
                 }
             })
             .catch(error => {
