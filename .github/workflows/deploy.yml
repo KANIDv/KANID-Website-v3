@@ -20,11 +20,13 @@ jobs:
         extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql
         coverage: none
     
-    - name: Setup Composer
-      uses: ramsey/composer-install@v4
-      with:
-        composer-options: '--no-dev --prefer-dist --no-interaction'
-        dependency-versions: 'locked'
+    - name: Install Composer
+      run: |
+        curl -sS https://getcomposer.org/installer | php
+        sudo mv composer.phar /usr/local/bin/composer
+    
+    - name: Install dependencies
+      run: composer install --no-dev --prefer-dist --no-interaction
     
     - name: Validate composer.json
       run: composer validate --strict
@@ -53,11 +55,10 @@ jobs:
         php-version: '8.3'
         extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql
     
-    - name: Setup Composer
-      uses: ramsey/composer-install@v4
-      with:
-        composer-options: '--no-dev --prefer-dist --no-interaction'
-        dependency-versions: 'locked'
+    - name: Install Composer
+      run: |
+        curl -sS https://getcomposer.org/installer | php
+        sudo mv composer.phar /usr/local/bin/composer
     
     - name: Build project
       run: |
