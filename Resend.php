@@ -2,48 +2,141 @@
 require 'vendor/autoload.php';
 use Resend\Resend;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $api_key = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";
+// Rate limiting und Spam-Schutz
+session_start();
 
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $subject = htmlspecialchars($_POST['subject']);
-    $message = nl2br(htmlspecialchars($_POST['message']));
+// Einfacher Honeypot-Schutz
+if (!empty($_POST['website'])) {
+    http_response_code(200);
+    exit;
+}
+
+// Time-trap: Mindestzeit zwischen Anfragen (5 Sekunden)
+if (isset($_SESSION['last_submission']) && (time() - $_SESSION['last_submission']) < 5) {
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'message' => 'Bitte warten Sie einen Moment, bevor Sie eine weitere Nachricht senden.']);
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // API-Key aus Umgebungsvariable (sicherer)
+    $api_key = getenv('RESEND_API_KEY');
+    if (!$api_key) {
+        // Fallback für lokale Entwicklung (nicht in Produktion verwenden)
+        $api_key = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";
+    }
+
+    // Eingabevalidierung
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $subject = trim($_POST['subject'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+
+    // Validierung
+    $errors = [];
+    
+    if (empty($name) || strlen($name) < 2 || strlen($name) > 100) {
+        $errors[] = 'Name muss zwischen 2 und 100 Zeichen lang sein.';
+    }
+    
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+    }
+    
+    if (empty($subject) || strlen($subject) < 3 || strlen($subject) > 200) {
+        $errors[] = 'Betreff muss zwischen 3 und 200 Zeichen lang sein.';
+    }
+    
+    if (empty($message) || strlen($message) < 10 || strlen($message) > 2000) {
+        $errors[] = 'Nachricht muss zwischen 10 und 2000 Zeichen lang sein.';
+    }
+
+    if (!empty($errors)) {
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => implode(' ', $errors)]);
+        exit;
+    }
+
+    // XSS-Schutz
+    $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+    $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+    $subject = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
+    $message = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
 
     try {
         $resend = Resend::client($api_key);
 
+        // E-Mail an KANID senden
         $res = $resend->emails->send([
             'from' => 'kontakt@kanid.de',
             'to' => ['info@kanid.de'],
             'subject' => "Neue Nachricht von der Website: $subject",
             'html' => "
+                <h2>Neue Kontaktanfrage von der Website</h2>
                 <p><strong>Name:</strong> $name</p>
-                <p><strong>Email:</strong> $email</p>
-                <p><strong>Nachricht:</strong><br>$message</p>
+                <p><strong>E-Mail:</strong> $email</p>
+                <p><strong>Betreff:</strong> $subject</p>
+                <p><strong>Nachricht:</strong></p>
+                <div style='background: #f5f5f5; padding: 15px; border-left: 4px solid #1b6ba4; margin: 10px 0;'>
+                    $message
+                </div>
+                <hr>
+                <p><small>Gesendet am: " . date('d.m.Y H:i:s') . " Uhr</small></p>
             ",
         ]);
 
-        // Send confirmation email to the sender
-        $params_to_sender = [
+        // Bestätigungs-E-Mail an den Absender senden
+        $confirmation_params = [
             'from' => 'KANID Kontaktformular <kontakt@kanid.de>',
-            'to' => [$email], // User's email
+            'to' => [$email],
             'subject' => 'Bestätigung Ihrer Kontaktanfrage bei KANID',
-            'html' => "<p>Hallo " . htmlspecialchars($name) . ",</p>" .
-                      "<p>vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage bezüglich '" . htmlspecialchars($subject) . "' erhalten und werden uns so schnell wie möglich bei Ihnen melden.</p>" .
-                      "<p>Zur Erinnerung, Ihre Nachricht war:</p>" .
-                      "<p>" . nl2br(htmlspecialchars($message)) . "</p>" . // Ensure message is displayed correctly
-                      "<p>Mit freundlichen Grüßen,</p>" .
-                      "<p>Ihr KANID-Team</p>"
+            'html' => "
+                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>
+                    <h2 style='color: #1b6ba4;'>Vielen Dank für Ihre Nachricht!</h2>
+                    <p>Hallo $name,</p>
+                    <p>wir haben Ihre Anfrage bezüglich <strong>$subject</strong> erhalten und werden uns so schnell wie möglich bei Ihnen melden.</p>
+                    
+                    <div style='background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;'>
+                        <h3 style='margin-top: 0; color: #495057;'>Ihre Nachricht:</h3>
+                        <p style='margin-bottom: 0;'>$message</p>
+                    </div>
+                    
+                    <p>Mit freundlichen Grüßen,<br>
+                    <strong>Ihr KANID-Team</strong></p>
+                    
+                    <hr style='border: none; border-top: 1px solid #dee2e6; margin: 20px 0;'>
+                    <p style='font-size: 12px; color: #6c757d;'>
+                        KANID UG (haftungsbeschränkt)<br>
+                        Heinrich-Hertz-Str. 11<br>
+                        70794 Filderstadt<br>
+                        Deutschland
+                    </p>
+                </div>
+            "
         ];
-        $resend->emails->send($params_to_sender); // Send the confirmation email
+        
+        $resend->emails->send($confirmation_params);
+
+        // Erfolg: Zeitstempel setzen
+        $_SESSION['last_submission'] = time();
+
+        // Logging (nur technische Details, keine personenbezogenen Daten)
+        error_log("Kontaktformular erfolgreich gesendet - Betreff: $subject, Zeit: " . date('Y-m-d H:i:s'));
 
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'ok', 'response' => $res]); // $res here is from the first email, consider if this is an issue. For now, it's as per original logic.
+        echo json_encode(['status' => 'ok', 'message' => 'Nachricht erfolgreich gesendet']);
 
     } catch (Exception $e) {
+        // Logging des Fehlers (ohne personenbezogene Daten)
+        error_log("Kontaktformular Fehler: " . $e->getMessage() . " - Zeit: " . date('Y-m-d H:i:s'));
+        
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        echo json_encode(['status' => 'error', 'message' => 'Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.']);
     }
+} else {
+    // Nur POST-Requests erlauben
+    http_response_code(405);
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'message' => 'Nur POST-Requests sind erlaubt.']);
 }
 ?>
