@@ -30,7 +30,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0' # Or a newer compatible version like 8.1, 8.2. Let's use 8.0 as a safe default.
+          php-version: '8.3' # Or a newer compatible version like 8.1, 8.2. Let's use 8.0 as a safe default.
           extensions: mbstring, xml, ctype, json, iconv # Common extensions, json is important for resend.php
           tools: composer # Installs composer
 
