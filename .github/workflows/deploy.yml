@@ -27,6 +27,8 @@ jobs:
     
     - name: Install dependencies
       run: composer install --no-dev --prefer-dist --no-interaction
+      env:
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
     
     - name: Validate composer.json
       run: composer validate --strict
@@ -64,6 +66,8 @@ jobs:
       run: |
         composer install --no-dev --prefer-dist --no-interaction
         echo "Build erfolgreich abgeschlossen"
+      env:
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
     
     - name: Deploy to IONOS
       uses: appleboy/ssh-action@v1.0.3
