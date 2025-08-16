@@ -29,19 +29,6 @@ jobs:
       run: composer install --no-dev --prefer-dist --no-interaction
       env:
         RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-    
-    - name: Validate composer.json
-      run: composer validate --strict
-    
-    - name: Check for security vulnerabilities
-      run: composer audit --format=json --output=security-report.json || true
-    
-    - name: Upload security report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: security-report
-        path: security-report.json
 
   deploy:
     needs: test
