@@ -1,0 +1,35 @@
+name: Build vendor artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-vendor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql
+          coverage: none
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction
+
+      - name: Upload vendor artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vendor
+          path: vendor
+
+
