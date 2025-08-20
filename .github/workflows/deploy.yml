@@ -58,13 +58,19 @@ jobs:
     
     - name: Deploy to IONOS
       uses: appleboy/ssh-action@v1.0.3
+      env:
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       with:
         host: ${{ secrets.IONOS_HOST }}
         username: ${{ secrets.IONOS_USERNAME }}
         key: ${{ secrets.IONOS_SSH_KEY }}
         port: ${{ secrets.IONOS_PORT }}
+        envs: RESEND_API_KEY
         script: |
           cd /var/www/html/
+          mkdir -p ../secure-config
+          echo "<?php define('RESEND_API_KEY', '${RESEND_API_KEY}');" > ../secure-config/resend.php
+          chmod 600 ../secure-config/resend.php
           git pull origin main
           composer install --no-dev --prefer-dist --no-interaction
           chmod 644 .htaccess

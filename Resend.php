@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+require __DIR__ . '/../secure-config/resend.php';
 use Resend\Resend;
 
 // Rate limiting und Spam-Schutz
@@ -19,11 +20,13 @@ if (isset($_SESSION['last_submission']) && (time() - $_SESSION['last_submission'
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // API-Key aus Umgebungsvariable (sicherer)
-    $api_key = getenv('RESEND_API_KEY');
+    // API-Key aus sicherer Konfigurationsdatei außerhalb des Webroots
+    $api_key = defined('RESEND_API_KEY') ? RESEND_API_KEY : null;
     if (!$api_key) {
-        // Fallback für lokale Entwicklung (nicht in Produktion verwenden)
-        $api_key = "re_NMeH8GZr_7gfjjfTyn35JbgsuMs1LKrQQ";
+        error_log('RESEND_API_KEY fehlt oder Konfigurationsdatei nicht gefunden.');
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'error', 'message' => 'E-Mail-Service momentan nicht verfügbar.']);
+        exit;
     }
 
     // Eingabevalidierung
